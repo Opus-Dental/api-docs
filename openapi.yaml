@@ -3,9 +3,10 @@ info:
   version: v1
   title: Opus Dental API
   description: |
-    **⚠️ End of life notice:** This API is deprecated and will be replaced by
-    Opus API v2. Do not build new integrations against v1 endpoints.
-    Contact us for information on the v2 timeline.
+      ⚠️ **Notice:** This is Opus API v1, currently in active use. A new v2 is in
+      development and will replace v1 in the coming months. New integrations
+      should be scoped accordingly — please contact us before starting to discuss
+      the v2 timeline.
 host: tenantID.opusdentalonline.com
 basePath: /api/public/v1
 schemes:
