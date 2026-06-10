@@ -11,12 +11,14 @@ to vetted partners under a signed data agreement.
 
 **Base URL:** `https://[tenantID].opusdentalonline.com/api/public/v1`
 
+View the [Open API specification](https://opus-dental.github.io/api-docs/)
+
 
 ## Getting access
 
 Access is not self-service. To request API credentials:
 
-1. Contact sam.heyman@opusdental.com to discuss your use case
+1. Contact us to discuss your use case: [contact form](https://www.opusdental.com/no/opus-support/kontakt-oss)
 2. Sign a data processing agreement with Opus
 3. Receive your API key and onboarding documentation
 
