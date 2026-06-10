@@ -2,11 +2,16 @@ swagger: "2.0"
 info:
   version: v1
   title: Opus Dental API
-host: api.opusdentalonline.com
+  description: |
+    **⚠️ End of life notice:** This API is deprecated and will be replaced by
+    Opus API v2. Do not build new integrations against v1 endpoints.
+    Contact us for information on the v2 timeline.
+host: tenantID.opusdentalonline.com
+basePath: /api/public/v1
 schemes:
   - https
 paths:
-  /api/public/v1/auth/clinic/login:
+  /auth/clinic/login:
     get:
       tags:
         - Authentication
@@ -43,7 +48,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/System.ValueTuple[System.String,System.String]"
-  /api/public/v1/appointments/schedule/overview/availabletimes:
+  /appointments/schedule/overview/availabletimes:
     get:
       tags:
         - Availability
@@ -90,7 +95,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /api/public/v1/appointments/schedule/availabletimes:
+  /appointments/schedule/availabletimes:
     get:
       tags:
         - Availability
@@ -137,7 +142,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /api/public/v1/appointments/reschedule/availabletimes:
+  /appointments/reschedule/availabletimes:
     get:
       tags:
         - Availability
@@ -189,7 +194,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /api/public/v1/portal/arrival-registration/appointments/today/{DateOfBirth}:
+  /portal/arrival-registration/appointments/today/{DateOfBirth}:
     get:
       tags:
         - Arrival registration
@@ -218,7 +223,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ArrivalRegistration.Ap\
                 pointmentDto"
-  /api/public/v1/portal/arrival-registration/check-in:
+  /portal/arrival-registration/check-in:
     patch:
       tags:
         - Arrival registration
@@ -267,7 +272,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/portal/arrival-registration/settings:
+  /portal/arrival-registration/settings:
     get:
       tags:
         - Arrival registration
@@ -285,7 +290,7 @@ paths:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Settings.FeatureSettings.A\
               rrivalRegistrationFeatureSettings"
   
-  /api/public/v1/bi/campaignmanager/{Year}:
+  /bi/campaignmanager/{Year}:
     get:
       tags:
         - Business Intelligence
@@ -313,7 +318,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientRevenueDto"
-  /api/public/v1/bi/trustbuilder:
+  /bi/trustbuilder:
     get:
       tags:
         - Business Intelligence
@@ -342,7 +347,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
-  /api/public/v1/bi/activebookings:
+  /bi/activebookings:
     get:
       tags:
         - Business Intelligence
@@ -372,7 +377,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
  
-  /api/public/v1/bookings:
+  /bookings:
     post:
       tags:
         - Bookings
@@ -491,7 +496,7 @@ paths:
           schema:
             format: int32
             type: integer
-  /api/public/v1/clinicians:
+  /clinicians:
     get:
       tags:
         - Clinicians
@@ -528,7 +533,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicianDTO"
   
-  /api/public/v1/clinics:
+  /clinics:
     get:
       tags:
         - Clinics
@@ -565,7 +570,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicDTO"
-  /api/public/v1/clinics/{id}:
+  /clinics/{id}:
     get:
       tags:
         - Clinics
@@ -586,8 +591,9 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicDTO"
-  /api/public/v1/clinics/accounts:
+  /clinics/accounts:
     get:
+      description: "Gets the registered bank account numbers for all clinics connected to the itb account."
       tags:
         - Clinics
       operationId: ClinicsV1_GetClinicAccounts
@@ -604,8 +610,11 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicAccountDTO"
-  /api/public/v1/clinics/{clinicId}/patients/{patientPersonalIdentification}/arrival:
+  /clinics/{clinicId}/patients/{patientPersonalIdentification}/arrival:
     patch:
+      description: |
+        Registers the arrival of the specified patient for it´s appointment at the specified clinic. 
+        Sets the arrival flag for all of the patient´s bookings for the current day on the specified clinic.
       tags:
         - Arrival registration
       operationId: ClinicsV1_RegisterPatientArrivalAtClinic
@@ -656,7 +665,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/clinics/{ClinicOnlineId}/invoices/exportable:
+  /clinics/{ClinicOnlineId}/invoices/exportable:
     get:
       tags:
         - Billing
@@ -727,7 +736,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.InvoiceOnlineRefe\
                 rence"
-  /api/public/v1/clinics/{clinicOnlineId}/settlements:
+  /clinics/{clinicOnlineId}/settlements:
     post:
       tags:
         - Billing
@@ -760,7 +769,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Features.Clinics.Settlements.Set\
               tlementDto"
-  /api/public/v1/clinics/{ClinicOnlineId}/settlements/{Id}:
+  /clinics/{ClinicOnlineId}/settlements/{Id}:
     get:
       tags:
         - Billing
@@ -795,7 +804,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Features.Clinics.Settlements.Set\
               tlementDto"
-  /api/public/v1/companies/invoices/{InvoiceOnlineId}:
+  /companies/invoices/{InvoiceOnlineId}:
     get:
       tags:
         - Billing
@@ -825,7 +834,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.CompanyInvoiceDto"
   
-  /api/public/v1/guardians/{guardianPersonalIdentification}/patients:
+  /guardians/{guardianPersonalIdentification}/patients:
     get:
       tags:
         - Guardians
@@ -871,7 +880,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.GuardianPatientDTO"
-  /api/public/v1/guardians/{guardianPersonalIdentification}/patients/{patientPersonalIdentification}/access/{hasAccess}:
+  /guardians/{guardianPersonalIdentification}/patients/{patientPersonalIdentification}/access/{hasAccess}:
     patch:
       tags:
         - Guardians
@@ -942,7 +951,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/guardians/{guardianPersonalIdentification}/bookings:
+  /guardians/{guardianPersonalIdentification}/bookings:
     get:
       tags:
         - Guardians
@@ -992,7 +1001,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /api/public/v1/portal/health-declaration/{patientPersonalIdentification}:
+  /portal/health-declaration/{patientPersonalIdentification}:
     get:
       tags:
         - Health Declaration
@@ -1072,7 +1081,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/invoices/{invoiceClinicId}:
+  /invoices/{invoiceClinicId}:
     get:
       tags:
         - Billing
@@ -1106,7 +1115,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceDTO"
-  /api/public/v1/invoices/unpaid:
+  /invoices/unpaid:
     get:
       tags:
         - Billing
@@ -1135,7 +1144,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceBatchI\
                 temDto"
-  /api/public/v1/invoices/unexported/from/{FromDate}:
+  /invoices/unexported/from/{FromDate}:
     get:
       tags:
         - Billing
@@ -1173,7 +1182,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceBatchI\
                 temDto"
-  /api/public/v1/invoices/{InvoiceOnlineId}/confirmExport:
+  /invoices/{InvoiceOnlineId}/confirmExport:
     put:
       tags:
         - Billing
@@ -1231,7 +1240,7 @@ paths:
           schema:
             type: object
 
-  /api/public/v1/kiosk/arrival-registration/settings:
+  /kiosk/arrival-registration/settings:
     get:
       tags:
         - Arrival registration
@@ -1248,7 +1257,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Settings.FeatureSettings.A\
               rrivalRegistrationFeatureSettings"
-  /api/public/v1/kiosk/arrival-registration/clinics:
+  /kiosk/arrival-registration/clinics:
     get:
       tags:
         - Arrival registration
@@ -1267,7 +1276,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Ki\
                 osk.ArrivalRegistration.GetClinicsForKiosk.KioskClinicDto"
-  /api/public/v1/kiosk/arrival-registration/check-in/patient/appointments:
+  /kiosk/arrival-registration/check-in/patient/appointments:
     patch:
       tags:
         - Arrival registration
@@ -1297,7 +1306,7 @@ paths:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Kiosk.ArrivalRegistration.\
                 AppointmentKioskDto"
   
-  /api/public/v1/opuscustomers/invoices/{InvoiceOnlineId}:
+  /opuscustomers/invoices/{InvoiceOnlineId}:
     get:
       tags:
         - Billing
@@ -1322,7 +1331,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.OpusCustomerInvoiceDto"
-  /api/public/v1/patients/{patientPersonalIdentification}:
+  /patients/{patientPersonalIdentification}:
     get:
       tags:
         - Patients
@@ -1513,7 +1522,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/patients:
+  /patients:
     get:
       tags:
         - Patients
@@ -1599,7 +1608,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/bookings:
+  /patients/{patientPersonalIdentification}/bookings:
     get:
       tags:
         - Bookings
@@ -1649,7 +1658,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/bookings/extended:
+  /patients/{patientPersonalIdentification}/bookings/extended:
     get:
       tags:
         - Bookings
@@ -1699,7 +1708,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /api/public/v1/patients/{patientPersonalIdentification}/guardians:
+  /patients/{patientPersonalIdentification}/guardians:
     get:
       tags:
         - Guardians
@@ -1744,7 +1753,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientWithGuardiansDT\
               O"
-  /api/public/v1/patients/{patientPersonalIdentification}/invoices:
+  /patients/{patientPersonalIdentification}/invoices:
     get:
       tags:
         - Billing
@@ -1799,7 +1808,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/invoices/unexported:
+  /patients/{patientPersonalIdentification}/invoices/unexported:
     get:
       tags:
         - Billing
@@ -1859,7 +1868,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.UnspecifiedIn\
                 voiceDTO"
-  /api/public/v1/patients/invoices/{InvoiceOnlineId}:
+  /patients/invoices/{InvoiceOnlineId}:
     get:
       tags:
         - Billing
@@ -1888,7 +1897,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientInvoiceDto"
-  /api/public/v1/patients/{patientPersonalIdentification}/quotes:
+  /patients/{patientPersonalIdentification}/quotes:
     get:
       tags:
         - Billing
@@ -1938,7 +1947,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.QuoteDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/healthcare:
+  /patients/{patientPersonalIdentification}/healthcare:
     get:
       tags:
         - Patients
@@ -2018,7 +2027,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/patients/{patientPersonalIdentification}/prescriptions:
+  /patients/{patientPersonalIdentification}/prescriptions:
     get:
       tags:
         - Patients
@@ -2065,7 +2074,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Prescription.DTO.Prescript\
                 ionDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/referrals:
+  /patients/{patientPersonalIdentification}/referrals:
     get:
       tags:
         - Patients
@@ -2111,7 +2120,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ReferralDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/teeth/{toothNumber}/treatments:
+  /patients/{patientPersonalIdentification}/teeth/{toothNumber}/treatments:
     get:
       tags:
         - Patients
@@ -2171,7 +2180,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Mouth.DTO.ToothTreatmentDT\
                 O"
-  /api/public/v1/patients/{patientPersonalIdentification}/teeth/status:
+  /patients/{patientPersonalIdentification}/teeth/status:
     get:
       tags:
         - Patients
@@ -2221,7 +2230,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Mouth.DTO.MouthStatusDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/journal/insurance-records:
+  /patients/{patientPersonalIdentification}/journal/insurance-records:
     get:
       tags:
         - Insurance
@@ -2294,7 +2303,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Journal.DTO.NTHFJournalEnt\
                 ryDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/journal/printout:
+  /patients/{patientPersonalIdentification}/journal/printout:
     get:
       tags:
         - Patients
@@ -2342,7 +2351,7 @@ paths:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Journal.DTO.JournalPrintou\
                 tRowDTO"
   
-  /api/public/v1/patients/{patientPersonalIdentification}/journal/freeTextRow:
+  /patients/{patientPersonalIdentification}/journal/freeTextRow:
     post:
       tags:
         - Patients
@@ -2375,7 +2384,7 @@ paths:
           schema:
             type: object
   
-  /api/public/v1/reservations:
+  /reservations:
     put:
       tags:
         - Reservations
@@ -2404,7 +2413,7 @@ paths:
             format: int32
             type: integer
 
-  /api/public/v1/timeslots:
+  /timeslots:
     get:
       tags:
         - Availability
@@ -2457,7 +2466,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
 
-  /api/public/v1/insurance/teeth:
+  /insurance/teeth:
     post:
       tags:
         - Insurance
@@ -2514,7 +2523,7 @@ paths:
             type: object
   
   
-  /api/public/v1/treatments:
+  /treatments:
     get:
       tags:
         - Treatments
@@ -2740,7 +2749,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.Optin.OptinClinicDTO"
 
-  /api/public/v1/patients/{patientPersonalIdentification}/siodetails:
+  /patients/{patientPersonalIdentification}/siodetails:
     get:
       tags:
         - SIO (Sweden)
@@ -2786,7 +2795,7 @@ paths:
             $ref: "#/definitions/Opus.Online.OnlineBooking.SocialInsuranceOffice.StatusView\
               .SocialInsuranceOfficePatientDTO"
 
-  /api/public/v1/reservations/{ReservationId}:
+  /reservations/{ReservationId}:
     delete:
       tags:
         - Reservations
@@ -2812,7 +2821,7 @@ paths:
           description: OK
           schema:
             type: object
-  /api/public/v1/reservations/available:
+  /reservations/available:
     get:
       tags:
         - Reservations
@@ -2864,7 +2873,7 @@ paths:
           schema:
             type: boolean
   
-  /api/public/v1/bookings/treatedlist:
+  /bookings/treatedlist:
     get:
       tags:
         - Bookings
