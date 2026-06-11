@@ -1,9 +1,11 @@
-# Opus API (v1)
 
-⚠️ **Notice:** This is Opus API v1, currently in active use. A new v2 is in
-development and will replace v1 in the coming months. New integrations
-should be scoped accordingly — please contact us before starting to discuss
-the v2 timeline.
+> [!WARNING]
+> This Opus API v1 is currently in active use, however a new v2 is in
+> development and will replace v1 in the coming months. New integrations
+> should be scoped accordingly — please contact us before starting to discuss
+> the v2 timeline.
+
+# Opus API (v1)
 
 The Opus API gives authorised partners programmatic access to dental clinic data
 including patient journals, invoices, and treatment records. Access is available
