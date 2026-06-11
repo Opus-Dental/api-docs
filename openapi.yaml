@@ -12,48 +12,14 @@ basePath: /api/public/v1
 schemes:
   - https
 paths:
-  /auth/clinic/login:
-    get:
-      tags:
-        - Authentication
-      operationId: AuthenticationV1_Login
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: accountId
-          in: query
-          required: true
-          type: string
-          format: uuid
-        - name: apiKey
-          in: query
-          required: true
-          type: string
-        - name: clinicOnlineIds
-          in: query
-          required: true
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-        - name: isLogin
-          in: query
-          required: true
-          type: boolean
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/System.ValueTuple[System.String,System.String]"
   /appointments/schedule/overview/availabletimes:
     get:
       tags:
-        - Availability
+        - Availability & Scheduling
       operationId: AppointmentsV1_GetOverView
+      description:
+        Retrieve all timeslots, without splitting for the specified interval. This is intended to give an overview of days, and can provide up to two months of data. 
+        Note that since the times are not splitted (and are often longer than the timeslot expected for booking), you need to use either of the available time api:s for splitted times. Or you can freely change Start/end to match the treatement length.
       consumes: []
       produces:
         - application/json
@@ -99,7 +65,7 @@ paths:
   /appointments/schedule/availabletimes:
     get:
       tags:
-        - Availability
+        - Availability & Scheduling
       operationId: AppointmentsV1_GetAvailableTimesForScheduling
       consumes: []
       produces:
@@ -146,7 +112,7 @@ paths:
   /appointments/reschedule/availabletimes:
     get:
       tags:
-        - Availability
+        - Availability & Scheduling
       operationId: AppointmentsV1_GetAvailableTimesForRescheduling
       consumes: []
       produces:
@@ -195,102 +161,6 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /portal/arrival-registration/appointments/today/{DateOfBirth}:
-    get:
-      tags:
-        - Arrival registration
-      operationId: ArrivalRegistrationV1_GetTodaysAppointmentsByDateOfBirth
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: dateOfBirth
-          in: query
-          required: true
-          type: string
-        - name: request.dateOfBirth
-          in: query
-          required: false
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ArrivalRegistration.Ap\
-                pointmentDto"
-  /portal/arrival-registration/check-in:
-    patch:
-      tags:
-        - Arrival registration
-      operationId: ArrivalRegistrationV1_RegisterPatientArrivalAtClinic
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.bookingId
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.clinicId
-          in: query
-          required: false
-          type: string
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /portal/arrival-registration/settings:
-    get:
-      tags:
-        - Arrival registration
-      operationId: ArrivalRegistrationV1_GetArrivalRegistrationSettings
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Settings.FeatureSettings.A\
-              rrivalRegistrationFeatureSettings"
-  
   /bi/campaignmanager/{Year}:
     get:
       tags:
@@ -348,36 +218,6 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
-  /bi/activebookings:
-    get:
-      tags:
-        - Business Intelligence
-      operationId: BiV1_GetPatientsActiveBookings
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.fromDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.toDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
- 
   /bookings:
     post:
       tags:
@@ -500,7 +340,7 @@ paths:
   /clinicians:
     get:
       tags:
-        - Clinicians
+        - Availability & Scheduling
       operationId: CliniciansV1_GetClinicians
       consumes: []
       produces:
@@ -617,7 +457,7 @@ paths:
         Registers the arrival of the specified patient for it´s appointment at the specified clinic. 
         Sets the arrival flag for all of the patient´s bookings for the current day on the specified clinic.
       tags:
-        - Arrival registration
+        - Clinics
       operationId: ClinicsV1_RegisterPatientArrivalAtClinic
       consumes: []
       produces:
@@ -669,7 +509,7 @@ paths:
   /clinics/{ClinicOnlineId}/invoices/exportable:
     get:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: ClinicsV1_GetClinicExportableInvoices
       consumes: []
       produces:
@@ -736,105 +576,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.InvoiceOnlineRefe\
-                rence"
-  /clinics/{clinicOnlineId}/settlements:
-    post:
-      tags:
-        - Billing
-      operationId: ClinicsV1_RegisterSettlement
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: clinicOnlineId
-          in: path
-          required: true
-          type: string
-        - name: request
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Fe\
-              atures.Clinics.RegisterSettlement.Request"
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Features.Clinics.Settlements.Set\
-              tlementDto"
-  /clinics/{ClinicOnlineId}/settlements/{Id}:
-    get:
-      tags:
-        - Billing
-      operationId: ClinicsV1_ViewSettlement
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: clinicOnlineId
-          in: query
-          required: true
-          type: string
-        - name: id
-          in: query
-          required: true
-          type: string
-        - name: request.id
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.clinicOnlineId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Features.Clinics.Settlements.Set\
-              tlementDto"
-  /companies/invoices/{InvoiceOnlineId}:
-    get:
-      tags:
-        - Billing
-      operationId: CompaniesV1_GetSpecificCompanyInvoice
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: InvoiceOnlineId
-          in: path
-          required: true
-          type: string
-        - name: request.anonymize
-          in: query
-          required: false
-          type: boolean
-        - name: request.invoiceOnlineId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.CompanyInvoiceDto"
-  
+                rence"  
   /guardians/{guardianPersonalIdentification}/patients:
     get:
       tags:
@@ -1002,124 +744,10 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /portal/health-declaration/{patientPersonalIdentification}:
-    get:
-      tags:
-        - Health Declaration
-      operationId: HealthDeclarationV1_GetHealthcare
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Health.DTO.HealthDeclarati\
-              onDTO"
-    patch:
-      tags:
-        - Health Declaration
-      operationId: HealthDeclarationV1_RegisterHealthcare
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: declaration
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Health.DTO.HealthDeclarati\
-              onDTO"
-        - name: bankIdConfirmed
-          in: query
-          required: false
-          type: boolean
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /invoices/{invoiceClinicId}:
-    get:
-      tags:
-        - Billing
-      operationId: InvoicesV1_GetInvoice
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: invoiceClinicId
-          in: path
-          required: true
-          type: string
-        - name: request.invoiceClinicId
-          in: query
-          required: false
-          type: string
-        - name: request.invoiceClinicIdParsed.invoiceId
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.invoiceClinicIdParsed.clinicId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceDTO"
   /invoices/unpaid:
     get:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: InvoicesV1_GetUnpaidInvoices
       consumes: []
       produces:
@@ -1148,7 +776,7 @@ paths:
   /invoices/unexported/from/{FromDate}:
     get:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: InvoicesV1_GetUnexportedInvoicesFromDate
       consumes: []
       produces:
@@ -1184,9 +812,9 @@ paths:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceBatchI\
                 temDto"
   /invoices/{InvoiceOnlineId}/confirmExport:
-    put:
+    patch:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: InvoicesV1_Confirm
       consumes: []
       produces:
@@ -1212,126 +840,6 @@ paths:
           description: OK
           schema:
             type: object
-    patch:
-      tags:
-        - Billing
-      operationId: InvoicesV1_Confirm
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: InvoiceOnlineId
-          in: path
-          required: true
-          type: string
-        - name: request.exportType
-          in: query
-          required: false
-          type: string
-        - name: request.invoiceOnlineId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-
-  /kiosk/arrival-registration/settings:
-    get:
-      tags:
-        - Arrival registration
-      operationId: KioskArrivalRegistrationV1_GetArrivalRegistrationSettings
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Settings.FeatureSettings.A\
-              rrivalRegistrationFeatureSettings"
-  /kiosk/arrival-registration/clinics:
-    get:
-      tags:
-        - Arrival registration
-      operationId: KioskArrivalRegistrationV1_GetClinicsForKiosk
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Ki\
-                osk.ArrivalRegistration.GetClinicsForKiosk.KioskClinicDto"
-  /kiosk/arrival-registration/check-in/patient/appointments:
-    patch:
-      tags:
-        - Arrival registration
-      operationId: KioskArrivalRegistrationV1_CheckInPatientAppointments
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.dateOfBirth
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.personalNumber
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Kiosk.ArrivalRegistration.\
-                AppointmentKioskDto"
-  
-  /opuscustomers/invoices/{InvoiceOnlineId}:
-    get:
-      tags:
-        - Billing
-      operationId: OpusCustomersV1_GetSpecificOpusCustomerInvoice
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: InvoiceOnlineId
-          in: path
-          required: true
-          type: string
-        - name: request.invoiceOnlineId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.OpusCustomerInvoiceDto"
   /patients/{patientPersonalIdentification}:
     get:
       tags:
@@ -1709,110 +1217,10 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /patients/{patientPersonalIdentification}/guardians:
-    get:
-      tags:
-        - Guardians
-      operationId: PatientsV1_GetGuardians
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientWithGuardiansDT\
-              O"
-  /patients/{patientPersonalIdentification}/invoices:
-    get:
-      tags:
-        - Billing
-      operationId: PatientsV1_GetInvoices
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: request.subscriptionFilter
-          in: query
-          required: false
-          type: integer
-          format: int32
-          enum:
-            - 0
-            - 1
-            - 2
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceDTO"
   /patients/{patientPersonalIdentification}/invoices/unexported:
     get:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: PatientsV1_GetUnexportedInvoices
       consumes: []
       produces:
@@ -1872,7 +1280,7 @@ paths:
   /patients/invoices/{InvoiceOnlineId}:
     get:
       tags:
-        - Billing
+        - Billing & Invoices
       operationId: PatientsV1_GetSpecificPatientInvoice
       consumes: []
       produces:
@@ -1898,60 +1306,10 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientInvoiceDto"
-  /patients/{patientPersonalIdentification}/quotes:
-    get:
-      tags:
-        - Billing
-      operationId: PatientsV1_GetQuotes
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: request.clinicId
-          in: query
-          required: false
-          type: string
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.QuoteDTO"
   /patients/{patientPersonalIdentification}/healthcare:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetHealthcare
       consumes: []
       produces:
@@ -1995,7 +1353,7 @@ paths:
               onDTO"
     patch:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_RegisterHealthcare
       consumes:
         - application/json
@@ -2031,7 +1389,7 @@ paths:
   /patients/{patientPersonalIdentification}/prescriptions:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetPrescriptions
       consumes: []
       produces:
@@ -2078,7 +1436,7 @@ paths:
   /patients/{patientPersonalIdentification}/referrals:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetReferrals
       consumes: []
       produces:
@@ -2124,7 +1482,7 @@ paths:
   /patients/{patientPersonalIdentification}/teeth/{toothNumber}/treatments:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetToothTreatments
       consumes: []
       produces:
@@ -2184,7 +1542,7 @@ paths:
   /patients/{patientPersonalIdentification}/teeth/status:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetTeethStatus
       consumes: []
       produces:
@@ -2231,11 +1589,56 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Mouth.DTO.MouthStatusDTO"
-  /patients/{patientPersonalIdentification}/journal/insurance-records:
+  /api/public/v1/patients/{patientPersonalIdentification}/siodetails:
     get:
       tags:
-        - Insurance
-      operationId: PatientsV1_GetTeethInsuranceJournalRecords
+        - Patient Journal & Health
+      operationId: PatientsV1_GetJournalRecordsPrintout
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: patientPersonalIdentification
+          in: path
+          required: true
+          type: string
+        - name: request.patientPersonalIdentification
+          in: query
+          required: false
+          type: string
+        - name: request.personalIdentification.year
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: request.personalIdentification.month
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: request.personalIdentification.day
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: request.personalIdentification.extraDigits
+          in: query
+          required: false
+          type: string
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: "#/definitions/Opus.Online.OnlineBooking.SocialInsuranceOffice.StatusView\
+              .SocialInsuranceOfficePatientDTO"
+  /api/public/v1/patients/{patientPersonalIdentification}/quotes:
+    get:
+      tags:
+        - Patient Journal & Health
+      operationId: PatientsV1_GetQuotes
       consumes: []
       produces:
         - application/json
@@ -2251,28 +1654,6 @@ paths:
           in: query
           required: false
           type: string
-        - name: request.bankIdConfirmed
-          in: query
-          required: false
-          type: boolean
-        - name: request.consent.consentGiven
-          in: query
-          required: false
-          type: boolean
-        - name: request.consent.consentUrl
-          in: query
-          required: false
-          type: string
-        - name: request.consent.startDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.consent.endDate
-          in: query
-          required: false
-          type: string
-          format: date-time
         - name: request.patientPersonalIdentification
           in: query
           required: false
@@ -2302,12 +1683,11 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Journal.DTO.NTHFJournalEnt\
-                ryDTO"
+              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.QuoteDTO"
   /patients/{patientPersonalIdentification}/journal/printout:
     get:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_GetJournalRecordsPrintout
       consumes: []
       produces:
@@ -2355,7 +1735,7 @@ paths:
   /patients/{patientPersonalIdentification}/journal/freeTextRow:
     post:
       tags:
-        - Patients
+        - Patient Journal & Health
       operationId: PatientsV1_AddFreeTextRowToJournal
       consumes:
         - application/json
@@ -2388,7 +1768,7 @@ paths:
   /reservations:
     put:
       tags:
-        - Reservations
+        - Availability & Scheduling
       operationId: ReservationsV1_MakeReservation
       consumes:
         - application/json
@@ -2417,7 +1797,7 @@ paths:
   /timeslots:
     get:
       tags:
-        - Availability
+        - Availability & Scheduling
       operationId: TimeSlotsV1_GetCalendar
       consumes: []
       produces:
@@ -2465,69 +1845,11 @@ paths:
           schema:
             type: array
             items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-
-  /insurance/teeth:
-    post:
-      tags:
-        - Insurance
-      operationId: InsuranceV1_Register
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Fe\
-              atures.DentalJournal.RegisterInsurance.Request"
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-    delete:
-      tags:
-        - Insurance
-      operationId: InsuranceV1_Cancel
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Fe\
-              atures.DentalJournal.CancelInsurance.Request"
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  
-  
+              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"  
   /treatments:
     get:
       tags:
-        - Treatments
+        - Availability & Scheduling
       operationId: TreatmentsV1_GetTreatments
       consumes: []
       produces:
@@ -2556,250 +1878,10 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TreatmentDTO"
-
-  /api/public/fhir/v1/appointment:
-    post:
-      tags:
-        - FHIR
-      operationId: FhirBookingsV1_ScheduleAppointmentAsync
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /api/public/fhir/v1/appointmentResponse:
-    post:
-      tags:
-        - FHIR
-      operationId: FhirBookingsV1_CancelBookingAsync
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /api/public/fhir/v1/practitioner:
-    get:
-      tags:
-        - FHIR
-      operationId: FhirCliniciansV1_GetClinicians
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.identifier
-          in: query
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /api/public/fhir/v1/practitioner/_search:
-    post:
-      tags:
-        - FHIR
-      operationId: FhirCliniciansV1_SearchClinicians
-      consumes:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-        - application/x-www-form-urlencoded
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request
-          in: body
-          required: true
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.Frontend.Web.Core.AppServices.Fe\
-              atures.FHIR.Clinicians.FhirGetClinicians.Request"
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-  /api/public/fhir/v1/slot:
-    get:
-      tags:
-        - FHIR
-      operationId: FhirTimeSlotsV1_GetAvailableTimeSlots
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: schedule.identifier
-          in: query
-          required: true
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-        - name: request.status
-          in: query
-          required: false
-          type: string
-        - name: request.start
-          in: query
-          required: false
-          type: string
-        - name: request.end
-          in: query
-          required: false
-          type: string
-        - name: request.identifier
-          in: query
-          required: false
-          type: array
-          items:
-            type: string
-          collectionFormat: multi
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-
-  /api/melin/v1/clinics:
-    get:
-      tags:
-        - Melin
-      operationId: ClinicMelinV1_GetDetailedClinics
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicV2Dto"
-
-  /api/melin/v1/invoices/{InvoiceOnlineId}/confirmExport:
-    put:
-      tags:
-        - Melin
-      operationId: InvoiceV1Melin_Confirm
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: InvoiceOnlineId
-          in: path
-          required: true
-          type: string
-        - name: request.invoiceOnlineId
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: object
-
-  /api/optin/v1/clinics/exportEnabled:
-    get:
-      tags:
-        - Optin / Front
-      operationId: OptinClinicV1_GetExportEnabled
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters: []
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.Optin.OptinClinicDTO"
-
-  /patients/{patientPersonalIdentification}/siodetails:
-    get:
-      tags:
-        - SIO (Sweden)
-      operationId: PatientsV1_GetJournalRecordsPrintout
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: patientPersonalIdentification
-          in: path
-          required: true
-          type: string
-        - name: request.patientPersonalIdentification
-          in: query
-          required: false
-          type: string
-        - name: request.personalIdentification.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.month
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.day
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.personalIdentification.extraDigits
-          in: query
-          required: false
-          type: string
-      responses:
-        "200":
-          description: OK
-          schema:
-            $ref: "#/definitions/Opus.Online.OnlineBooking.SocialInsuranceOffice.StatusView\
-              .SocialInsuranceOfficePatientDTO"
-
   /reservations/{ReservationId}:
     delete:
       tags:
-        - Reservations
+        - Availability & Scheduling
       operationId: ReservationsV1_DeleteReservation
       consumes: []
       produces:
@@ -2825,7 +1907,7 @@ paths:
   /reservations/available:
     get:
       tags:
-        - Reservations
+        - Availability & Scheduling
       operationId: ReservationsV1_IsTimeAvailable
       consumes:
         - application/json
@@ -2873,60 +1955,6 @@ paths:
           description: OK
           schema:
             type: boolean
-  
-  /bookings/treatedlist:
-    get:
-      tags:
-        - Bookings
-      operationId: TreatedBookingsV1_TreatedBookings
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.treatmentId
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.clinicianId
-          in: query
-          required: false
-          type: integer
-          format: int32
-        - name: request.clinicId
-          in: query
-          required: false
-          type: string
-        - name: request.from
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.to
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.treatmentStatus
-          in: query
-          required: false
-          type: integer
-          format: int32
-          enum:
-            - 0
-            - 1
-            - 2
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingSearchResultDTO"
-  
 definitions:
   Opus.Online.OnlineBooking.Model.AccountActivation:
     type: object
