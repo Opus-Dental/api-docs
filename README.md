@@ -33,8 +33,8 @@ All requests require an API key.
 ## Status and versioning
 
 These APIs are currently in end. Endpoints and response formats will
-change over the next 6–12 months. Breaking changes will be communicated in
-[changelog.md](docs/changelog.md) with reasonable notice.
+change over the next 6–12 months. Breaking changes will be communicated in the
+[changelog](docs/changelog.md) with reasonable notice.
 
 Do not build production systems on these endpoints without discussing stability
 commitments with Opus first.
@@ -44,18 +44,14 @@ commitments with Opus first.
 A sandbox environment is available for testing. It returns realistic mock
 responses without connecting to live clinic data.
 
-The sandbox uses [Mockoon](https://mockoon.com). Request the config file
-and run it locally.
-
-Credentials:
-1. Base URL: https://opus-sandbox.eu1.mockoon.app
-2. API key: please request access
+The sandbox uses [Mockoon](https://mockoon.com). Partners will be given the config file
+during the onboarding process.
 
 ## Contact
 
 To request API access: 
 https://www.opusdental.com/no/opus-support/kontakt-oss
 
-Questions or issues: sam.heyman@opusdental.com
+Questions or issues please contact: sam.heyman@opusdental.com
 
 
