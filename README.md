@@ -32,7 +32,7 @@ All requests require an API key.
 
 ## Status and versioning
 
-These APIs are currently in end. Endpoints and response formats will
+These APIs are currently in active use but subject to change. Endpoints and response formats will
 change over the next 6–12 months. Breaking changes will be communicated in the
 [changelog](docs/changelog.md) with reasonable notice.
 
