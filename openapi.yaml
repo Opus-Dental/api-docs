@@ -8,11 +8,11 @@ info:
       should be scoped accordingly — please contact us before starting to discuss
       the v2 timeline.
 host: tenantID.opusdentalonline.com
-basePath: /api/public/v1
+basePath: /api
 schemes:
   - https
 paths:
-  /appointments/schedule/overview/availabletimes:
+  /public/v1/appointments/schedule/overview/availabletimes:
     get:
       tags:
         - Availability & Scheduling
@@ -62,7 +62,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /appointments/schedule/availabletimes:
+  /public/v1/appointments/schedule/availabletimes:
     get:
       tags:
         - Availability & Scheduling
@@ -109,7 +109,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /appointments/reschedule/availabletimes:
+  /public/v1/appointments/reschedule/availabletimes:
     get:
       tags:
         - Availability & Scheduling
@@ -161,64 +161,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"
-  /bi/campaignmanager/{Year}:
-    get:
-      tags:
-        - Business Intelligence
-      operationId: BiV1_GetPatientRevenue
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: year
-          in: query
-          required: true
-          type: string
-        - name: request.year
-          in: query
-          required: false
-          type: integer
-          format: int32
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientRevenueDto"
-  /bi/trustbuilder:
-    get:
-      tags:
-        - Business Intelligence
-      operationId: BiV1_GetPatientsActiveBookings
-      consumes: []
-      produces:
-        - application/json
-        - text/json
-        - application/xml
-        - text/xml
-      parameters:
-        - name: request.fromDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-        - name: request.toDate
-          in: query
-          required: false
-          type: string
-          format: date-time
-      responses:
-        "200":
-          description: OK
-          schema:
-            type: array
-            items:
-              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
-  /bookings:
+  /public/v1/bookings:
     post:
       tags:
         - Bookings
@@ -337,7 +280,7 @@ paths:
           schema:
             format: int32
             type: integer
-  /clinicians:
+  /public/v1/clinicians:
     get:
       tags:
         - Availability & Scheduling
@@ -374,7 +317,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicianDTO"
   
-  /clinics:
+  /public/v1/clinics:
     get:
       tags:
         - Clinics
@@ -411,7 +354,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicDTO"
-  /clinics/{id}:
+  /public/v1/clinics/{id}:
     get:
       tags:
         - Clinics
@@ -432,7 +375,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicDTO"
-  /clinics/accounts:
+  /public/v1/clinics/accounts:
     get:
       description: "Gets the registered bank account numbers for all clinics connected to the itb account."
       tags:
@@ -451,7 +394,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ClinicAccountDTO"
-  /clinics/{clinicId}/patients/{patientPersonalIdentification}/arrival:
+  /public/v1/clinics/{clinicId}/patients/{patientPersonalIdentification}/arrival:
     patch:
       description: |
         Registers the arrival of the specified patient for it´s appointment at the specified clinic. 
@@ -506,7 +449,7 @@ paths:
           description: OK
           schema:
             type: object
-  /clinics/{ClinicOnlineId}/invoices/exportable:
+  /public/v1/clinics/{ClinicOnlineId}/invoices/exportable:
     get:
       tags:
         - Billing & Invoices
@@ -577,7 +520,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.InvoiceOnlineRefe\
                 rence"  
-  /guardians/{guardianPersonalIdentification}/patients:
+  /public/v1/guardians/{guardianPersonalIdentification}/patients:
     get:
       tags:
         - Guardians
@@ -623,7 +566,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.GuardianPatientDTO"
-  /guardians/{guardianPersonalIdentification}/patients/{patientPersonalIdentification}/access/{hasAccess}:
+  /public/v1/guardians/{guardianPersonalIdentification}/patients/{patientPersonalIdentification}/access/{hasAccess}:
     patch:
       tags:
         - Guardians
@@ -694,7 +637,7 @@ paths:
           description: OK
           schema:
             type: object
-  /guardians/{guardianPersonalIdentification}/bookings:
+  /public/v1/guardians/{guardianPersonalIdentification}/bookings:
     get:
       tags:
         - Guardians
@@ -744,7 +687,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /invoices/unpaid:
+  /public/v1/invoices/unpaid:
     get:
       tags:
         - Billing & Invoices
@@ -773,7 +716,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceBatchI\
                 temDto"
-  /invoices/unexported/from/{FromDate}:
+  /public/v1/invoices/unexported/from/{FromDate}:
     get:
       tags:
         - Billing & Invoices
@@ -811,7 +754,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.InvoiceBatchI\
                 temDto"
-  /invoices/{InvoiceOnlineId}/confirmExport:
+  /public/v1/invoices/{InvoiceOnlineId}/confirmExport:
     patch:
       tags:
         - Billing & Invoices
@@ -840,7 +783,7 @@ paths:
           description: OK
           schema:
             type: object
-  /patients/{patientPersonalIdentification}:
+  /public/v1/patients/{patientPersonalIdentification}:
     get:
       tags:
         - Patients
@@ -1031,7 +974,7 @@ paths:
           description: OK
           schema:
             type: object
-  /patients:
+  /public/v1/patients:
     get:
       tags:
         - Patients
@@ -1117,7 +1060,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientDTO"
-  /patients/{patientPersonalIdentification}/bookings:
+  /public/v1/patients/{patientPersonalIdentification}/bookings:
     get:
       tags:
         - Bookings
@@ -1167,7 +1110,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTO"
-  /patients/{patientPersonalIdentification}/bookings/extended:
+  /public/v1/patients/{patientPersonalIdentification}/bookings/extended:
     get:
       tags:
         - Bookings
@@ -1217,7 +1160,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.BookingDTOExtended"
-  /patients/{patientPersonalIdentification}/invoices/unexported:
+  /public/v1/patients/{patientPersonalIdentification}/invoices/unexported:
     get:
       tags:
         - Billing & Invoices
@@ -1277,7 +1220,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Invoices.DTO.UnspecifiedIn\
                 voiceDTO"
-  /patients/invoices/{InvoiceOnlineId}:
+  /public/v1/patients/invoices/{InvoiceOnlineId}:
     get:
       tags:
         - Billing & Invoices
@@ -1306,7 +1249,7 @@ paths:
           description: OK
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientInvoiceDto"
-  /patients/{patientPersonalIdentification}/healthcare:
+  /public/v1/patients/{patientPersonalIdentification}/healthcare:
     get:
       tags:
         - Patient Journal & Health
@@ -1386,7 +1329,7 @@ paths:
           description: OK
           schema:
             type: object
-  /patients/{patientPersonalIdentification}/prescriptions:
+  /public/v1/patients/{patientPersonalIdentification}/prescriptions:
     get:
       tags:
         - Patient Journal & Health
@@ -1433,7 +1376,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Prescription.DTO.Prescript\
                 ionDTO"
-  /patients/{patientPersonalIdentification}/referrals:
+  /public/v1/patients/{patientPersonalIdentification}/referrals:
     get:
       tags:
         - Patient Journal & Health
@@ -1479,7 +1422,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.ReferralDTO"
-  /patients/{patientPersonalIdentification}/teeth/{toothNumber}/treatments:
+  /public/v1/patients/{patientPersonalIdentification}/teeth/{toothNumber}/treatments:
     get:
       tags:
         - Patient Journal & Health
@@ -1539,7 +1482,7 @@ paths:
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Mouth.DTO.ToothTreatmentDT\
                 O"
-  /patients/{patientPersonalIdentification}/teeth/status:
+  /public/v1/patients/{patientPersonalIdentification}/teeth/status:
     get:
       tags:
         - Patient Journal & Health
@@ -1589,7 +1532,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Mouth.DTO.MouthStatusDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/siodetails:
+  /public/v1/patients/{patientPersonalIdentification}/siodetails:
     get:
       tags:
         - Patient Journal & Health
@@ -1634,7 +1577,7 @@ paths:
           schema:
             $ref: "#/definitions/Opus.Online.OnlineBooking.SocialInsuranceOffice.StatusView\
               .SocialInsuranceOfficePatientDTO"
-  /api/public/v1/patients/{patientPersonalIdentification}/quotes:
+  /public/v1/patients/{patientPersonalIdentification}/quotes:
     get:
       tags:
         - Patient Journal & Health
@@ -1684,7 +1627,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.QuoteDTO"
-  /patients/{patientPersonalIdentification}/journal/printout:
+  /public/v1/patients/{patientPersonalIdentification}/journal/printout:
     get:
       tags:
         - Patient Journal & Health
@@ -1732,7 +1675,7 @@ paths:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Journal.DTO.JournalPrintou\
                 tRowDTO"
   
-  /patients/{patientPersonalIdentification}/journal/freeTextRow:
+  /public/v1/patients/{patientPersonalIdentification}/journal/freeTextRow:
     post:
       tags:
         - Patient Journal & Health
@@ -1765,7 +1708,7 @@ paths:
           schema:
             type: object
   
-  /reservations:
+  /public/v1/reservations:
     put:
       tags:
         - Availability & Scheduling
@@ -1794,7 +1737,7 @@ paths:
             format: int32
             type: integer
 
-  /timeslots:
+  /public/v1/timeslots:
     get:
       tags:
         - Availability & Scheduling
@@ -1846,7 +1789,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TimeSlotDTO"  
-  /treatments:
+  /public/v1/treatments:
     get:
       tags:
         - Availability & Scheduling
@@ -1878,7 +1821,7 @@ paths:
             type: array
             items:
               $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.TreatmentDTO"
-  /reservations/{ReservationId}:
+  /public/v1/reservations/{ReservationId}:
     delete:
       tags:
         - Availability & Scheduling
@@ -1904,7 +1847,7 @@ paths:
           description: OK
           schema:
             type: object
-  /reservations/available:
+  /public/v1/reservations/available:
     get:
       tags:
         - Availability & Scheduling
@@ -1955,6 +1898,128 @@ paths:
           description: OK
           schema:
             type: boolean
+  /public/v1/bi/campaignmanager/{Year}:
+    get:
+      tags:
+        - Business Intelligence
+      operationId: BiV1_GetPatientRevenue
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: year
+          in: query
+          required: true
+          type: string
+        - name: request.year
+          in: query
+          required: false
+          type: integer
+          format: int32
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientRevenueDto"
+  /public/v1/bi/trustbuilder:
+    get:
+      tags:
+        - Business Intelligence
+      operationId: BiV1_GetPatientsActiveBookings
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: request.fromDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: request.toDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.DTO.PatientBookingDto"
+  /ToothInsurance/v1/record/list:
+    get:
+      tags: 
+        - Insurance
+      operationId: ToothInsuranceV1_RecordList
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: personalIdentification.year
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: personalIdentification.month
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: personalIdentification.day
+          in: query
+          required: false
+          type: integer
+          format: int32
+        - name: personalIdentification.extraDigits
+          in: query
+          required: false
+          type: string
+        - name: clinicId
+          in: query
+          required: false
+          type: string
+        - name: consent.consentGiven
+          in: query
+          required: false
+          type: boolean
+        - name: consent.consentUrl
+          in: query
+          required: false
+          type: string
+        - name: consent.startDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: consent.endDate
+          in: query
+          required: false
+          type: string
+          format: date-time
+        - name: bankIdConfirmed
+          in: query
+          required: false
+          type: boolean
+          default: false
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Opus.Online.OnlineBooking.Model.Journal.DTO.NTHFJournalEntryDTO"
 definitions:
   Opus.Online.OnlineBooking.Model.AccountActivation:
     type: object
