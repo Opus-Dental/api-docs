@@ -13,8 +13,13 @@ to vetted partners under a signed data agreement.
 
 **Base URL:** `https://[tenantID].opusdentalonline.com/api/public/v1`
 
-View the [Open API specification](https://opus-dental.github.io/api-docs/)
+## API Reference
 
+The full interactive API reference is available at:
+[opus-dental.github.io/api-docs](https://opus-dental.github.io/api-docs/)
+
+The OpenAPI specification can be downloaded directly:
+[openapi.yaml](openapi.yaml)
 
 ## Getting access
 
