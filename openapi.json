@@ -1,0 +1,2335 @@
+{
+  "uuid": "79097fb5-9705-48ed-a47b-271ad680890a",
+  "lastMigration": 33,
+  "name": "Opus Dental API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3002,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "4987a9bf-95d2-4e50-8105-93a9073b13af",
+      "type": "http",
+      "documentation": "Get invoice for clinic",
+      "method": "get",
+      "endpoint": "api/public/v1/invoices/:invoiceClinicId",
+      "responses": [
+        {
+          "uuid": "d065b6b6-9a96-48d1-a4c3-37b6297219de",
+          "body": "{\n  \"ID\": {{faker 'number.int' max=99999}},\n  \"Number\": {{faker 'number.int' max=99999}},\n  \"PersonalNumber\": \"\",\n  \"ClinicId\": \"\",\n  \"OcrNumber\": \"\",\n  \"InvoiceDate\": \"{{faker 'date.recent' 365}}\",\n  \"DueDate\": \"{{faker 'date.recent' 365}}\",\n  \"Status\": {{oneOf 0 1 2 3 4 5 -2 -1}},\n  \"TotalCost\": {{faker 'number.int' max=99999}},\n  \"IsFullyPaid\": {{faker 'datatype.boolean'}},\n  \"SocialInsuranceShare\": {{faker 'number.int' max=99999}},\n  \"VAT1\": {{faker 'number.int' max=99999}},\n  \"VAT2\": {{faker 'number.int' max=99999}},\n  \"InvoicedItems\": [\n    {\n      \"CreatedDate\": \"{{faker 'date.recent' 365}}\",\n      \"Text\": \"\",\n      \"Amount\": {{faker 'number.int' max=99999}},\n      \"VAT\": {{faker 'number.int' max=99999}},\n      \"VatRate\": {{faker 'number.int' max=99999}},\n      \"Vat1Amount\": {{faker 'number.int' max=99999}},\n      \"Vat2Amount\": {{faker 'number.int' max=99999}},\n      \"ProductNumber\": \"\",\n      \"ToothNumber\": {{faker 'number.int' max=99999}},\n      \"Surface\": \"\",\n      \"PriceCode\": \"\",\n      \"OriginalInvoiceNumber\": {{faker 'number.int' max=99999}},\n      \"PatientShare\": {{faker 'number.int' max=99999}},\n      \"SocialInsuranceAmount\": {{faker 'number.int' max=99999}},\n      \"IsReversal\": {{faker 'datatype.boolean'}}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The requested invoice",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "96612c5a-930e-4abe-9caf-2b947c9d5995",
+      "type": "http",
+      "documentation": "Get unpaid invoices",
+      "method": "get",
+      "endpoint": "api/public/v1/invoices/unpaid",
+      "responses": [
+        {
+          "uuid": "bb8d8b29-401e-4523-b116-bd819bf42079",
+          "body": "[\n  {\n    \"InvoiceID\": 5,\n    \"PersonalNumber\": \"19120203-123\",\n    \"ClinicID\": \"18-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"Type\": 1,\n    \"HasSubscription\": true\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of unpaid invoices",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "10c92f00-b06c-4673-9283-2d4c328a8e58",
+      "type": "http",
+      "documentation": "Get exportable invoices for all databases",
+      "method": "get",
+      "endpoint": "api/public/v1/invoices/unexported/from/:fromDate",
+      "responses": [
+        {
+          "uuid": "b020c479-e1a2-43be-b334-e52d266d9e92",
+          "body": "[\n  {\n    \"InvoiceID\": 5,\n    \"PersonalNumber\": \"19120203-123\",\n    \"ClinicID\": \"18-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"Type\": 1,\n    \"HasSubscription\": true\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of exportable invoices for all databases",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8ae7d9c9-97f5-49b2-8251-eb44b859f251",
+      "type": "http",
+      "documentation": "Confirm invoice export",
+      "method": "put",
+      "endpoint": "api/public/v1/invoices/:InvoiceOnlineId/confirmExport",
+      "responses": [
+        {
+          "uuid": "063c110c-f63f-4f68-a002-e449214f88ae",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "9574c038-9218-4aca-a350-d9c165def28d",
+      "type": "http",
+      "documentation": "Confirm invoice export",
+      "method": "patch",
+      "endpoint": "api/public/v1/invoices/:InvoiceOnlineId/confirmExport",
+      "responses": [
+        {
+          "uuid": "90f1ae6e-b641-473f-b7ca-cd7fccb49cce",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "608c5bff-054c-42ed-8c7f-bfc88bdf712f",
+      "type": "http",
+      "documentation": "Get Clinicians",
+      "method": "get",
+      "endpoint": "api/public/v1/clinicians",
+      "responses": [
+        {
+          "uuid": "c355f2ee-0283-42cc-905e-279d8e294dc3",
+          "body": "[\n  {\n    \"ID\": 471,\n    \"Name\": \"Hanne Maren Wildahl\",\n    \"Title\": \"Tannlege\",\n    \"Active\": true,\n    \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n    \"Info\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of clinicians",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6f8e7ea8-f314-4cf5-b8b2-5aa75982516c",
+      "type": "http",
+      "documentation": "Add Booking",
+      "method": "post",
+      "endpoint": "api/public/v1/bookings",
+      "responses": [
+        {
+          "uuid": "5f3fd823-aef9-4876-8753-6cfc8bcbc109",
+          "body": "{{faker 'number.int' max=99999}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The ID of the newly created booking.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "5ab6aeb3-c1f9-4527-b953-1798a7b61ea1",
+      "type": "http",
+      "documentation": "Reschedule Booking",
+      "method": "patch",
+      "endpoint": "api/public/v1/bookings",
+      "responses": [
+        {
+          "uuid": "0532018c-a04f-4a08-9ac1-4077352713a2",
+          "body": "{{faker 'number.int' max=99999}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The ID of the new appointment",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6bf1a513-c09f-470c-b20e-10c359c2cc1e",
+      "type": "http",
+      "documentation": "Cancel Booking",
+      "method": "delete",
+      "endpoint": "api/public/v1/bookings",
+      "responses": [
+        {
+          "uuid": "6f4ae15c-2084-45c2-8dce-da3e5609384d",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "1c711564-cfd2-41d5-b959-911bb00fd4de",
+      "type": "http",
+      "documentation": "Get treated bookings",
+      "method": "get",
+      "endpoint": "api/public/v1/bookings/treatedlist",
+      "responses": [
+        {
+          "uuid": "585e553a-614f-49c0-8196-0ed56c9276d3",
+          "body": "[\n  {\n    \"Id\": {{faker 'number.int' max=99999}},\n    \"TimeSlot\": {\n      \"ID\": 1,\n      \"Start\": \"2022-07-20T07:00:00\",\n      \"End\": \"2022-07-20T17:00:00\",\n      \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianID\": 3,\n      \"TreatmentID\": 2208\n    },\n    \"ClinicianName\": \"\",\n    \"ClinicianEmail\": \"\",\n    \"PatientId\": {{faker 'number.int' max=99999}},\n    \"CustomerNumber\": {{faker 'number.int' max=99999}},\n    \"TreatmentStatus\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "1985550a-6bd3-46bd-bc2f-d769292f199e",
+      "type": "http",
+      "documentation": "Register Insurance",
+      "method": "post",
+      "endpoint": "api/public/v1/insurance",
+      "responses": [
+        {
+          "uuid": "3f825bc9-5b9c-41b5-81de-b2fa9b5b1482",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "06dec694-8b4c-4a12-99ee-73e1def76c60",
+      "type": "http",
+      "documentation": "Cancel Insurance",
+      "method": "delete",
+      "endpoint": "api/public/v1/insurance",
+      "responses": [
+        {
+          "uuid": "65b94a28-3dd5-497a-815e-5a42905ffec8",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0970b2df-60dd-4c77-b8d3-1e96a48c7438",
+      "type": "http",
+      "documentation": "Revoke Consent",
+      "method": "put",
+      "endpoint": "api/public/v1/insurance/consent",
+      "responses": [
+        {
+          "uuid": "f004e4f5-3959-444e-960c-96775c815831",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8e47f6df-1c01-406a-b27e-6e8df84fb8ac",
+      "type": "http",
+      "documentation": "Get Insurance Journal Records",
+      "method": "get",
+      "endpoint": "api/public/v1/insurance/journal-records",
+      "responses": [
+        {
+          "uuid": "584fd66d-84aa-4ca2-9a7a-cc15d6cb17e7",
+          "body": "[\n  {\n    \"RecordGroup\": \"Misc\",\n    \"Status\": \"P\",\n    \"ClinicId\": 19,\n    \"ClinicianId\": 3,\n    \"ClinicianName\": \"0001-John Doe\",\n    \"CreatedDate\": \"2022-05-31T12:04:15.58\",\n    \"TreatmentDate\": \"2022-05-31T12:04:10.58\",\n    \"DisplayedDate\": \"2022-05-31\",\n    \"Text\": \"[a] Konsultation specialisttandvård\",\n    \"Surface\": null,\n    \"Tooth\": null,\n    \"InsuranceCode\": \"115/1301\",\n    \"PriceType\": \"H\",\n    \"DebitedTime\": null,\n    \"ShareType\": \"P\",\n    \"TechnicianAmount\": null,\n    \"Amount\": 0,\n    \"IsSigned\": false,\n    \"CalculatedReferencePrice\": 0,\n    \"ReferencePrice\": 0,\n    \"Id\": {{faker 'number.int' max=99999}},\n    \"InvoiceId\": {{faker 'number.int' max=99999}},\n    \"PaymentId\": {{faker 'number.int' max=99999}},\n    \"ProductCode\": \"\",\n    \"ClinicianInsuranceId\": \"\",\n    \"Type\": \"\",\n    \"ShareTypeDescription\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The list of insurance journal records.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "5514d212-60aa-4105-9b8e-61c28e54d6c9",
+      "type": "http",
+      "documentation": "Get guardian patients",
+      "method": "get",
+      "endpoint": "api/public/v1/guardians/:guardianPersonalIdentification/patients",
+      "responses": [
+        {
+          "uuid": "ea38aa29-eeb9-4280-a576-58dfcea40cce",
+          "body": "[\n  {\n    \"Patient\": {\n      \"ID\": 642,\n      \"PatientPersonalIdentification\": 1994100314572,\n      \"PersonalNumber\": {\n        \"Year\": 1994,\n        \"Month\": 10,\n        \"Day\": 3,\n        \"ExtraDigits\": 14572,\n        \"IdFormat\": {{oneOf 0 1 2 3 4}},\n        \"Kind\": {{oneOf 0 1 2 3}},\n        \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n        \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n        \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n      },\n      \"FirstName\": \"Jack\",\n      \"LastName\": \"Jackson\",\n      \"Adress1\": \"Vei 1\",\n      \"Adress2\": \"Leilighet 2\",\n      \"PostalCode\": 7412,\n      \"City\": \"HASLUM\",\n      \"Email\": \"jack@gmail.com\",\n      \"MobilePhoneNumber\": 753951258,\n      \"GuardianPersonalNumber\": \"\",\n      \"MunicipalityCode\": 3024,\n      \"HomePhoneNumber\": 159753258,\n      \"WorkPhoneNumber\": 456987321,\n      \"ConsentToMarketing\": false,\n      \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianId\": 3,\n      \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n      \"HasContent\": {{faker 'datatype.boolean'}}\n    },\n    \"GuardianAccess\": {{faker 'datatype.boolean'}}\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The patients associated with the guardian.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d723cd61-ea39-4eb4-b664-90d209f64d4f",
+      "type": "http",
+      "documentation": "Set guardian access",
+      "method": "patch",
+      "endpoint": "api/public/v1/guardians/:guardianPersonalIdentification/patients/:patientPersonalIdentification/access/:hasAccess",
+      "responses": [
+        {
+          "uuid": "320024c7-1fc4-439b-ab3c-24224991d704",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "3d6f732a-e894-42e4-aad7-36576e115f23",
+      "type": "http",
+      "documentation": "Get guardian patient bookings",
+      "method": "get",
+      "endpoint": "api/public/v1/guardians/:guardianPersonalIdentification/bookings",
+      "responses": [
+        {
+          "uuid": "a358b3e5-0022-4a29-ab49-6726b47b4e75",
+          "body": "[\n  {\n    \"ID\": 1777,\n    \"Patient\": {\n      \"ID\": 642,\n      \"PatientPersonalIdentification\": 1994100314572,\n      \"PersonalNumber\": {\n        \"Year\": 1994,\n        \"Month\": 10,\n        \"Day\": 3,\n        \"ExtraDigits\": 14572,\n        \"IdFormat\": {{oneOf 0 1 2 3 4}},\n        \"Kind\": {{oneOf 0 1 2 3}},\n        \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n        \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n        \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n      },\n      \"FirstName\": \"Jack\",\n      \"LastName\": \"Jackson\",\n      \"Adress1\": \"Vei 1\",\n      \"Adress2\": \"Leilighet 2\",\n      \"PostalCode\": 7412,\n      \"City\": \"HASLUM\",\n      \"Email\": \"jack@gmail.com\",\n      \"MobilePhoneNumber\": 753951258,\n      \"GuardianPersonalNumber\": \"\",\n      \"MunicipalityCode\": 3024,\n      \"HomePhoneNumber\": 159753258,\n      \"WorkPhoneNumber\": 456987321,\n      \"ConsentToMarketing\": false,\n      \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianId\": 3,\n      \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n      \"HasContent\": {{faker 'datatype.boolean'}}\n    },\n    \"TimeSlot\": {\n      \"ID\": 1777,\n      \"Start\": \"2024-06-01T10:00:00\",\n      \"End\": \"2024-06-01T10:30:00\",\n      \"Clinic\": {\n        \"ID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n        \"Name\": \"Distriktstannklinikken i Lillevik AS\",\n        \"Address1\": \"Adresse 1 - Test 1\",\n        \"Address2\": \"Adresse 2\",\n        \"Postalcode\": \"0484\",\n        \"City\": \"Oslo\",\n        \"Home\": 12345679,\n        \"Work\": 12345679,\n        \"Fax\": \"\",\n        \"Mobile\": 91288888,\n        \"Email\": \"test@example.com\"\n      },\n      \"Clinician\": {\n        \"ID\": 471,\n        \"Name\": \"Hanne Maren Wildahl\",\n        \"Title\": \"Tannlege\",\n        \"Active\": true,\n        \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n        \"Info\": \"\"\n      },\n      \"Treatment\": {\n        \"ID\": 123,\n        \"Name\": \"Undersøkelse 30 min\",\n        \"Description\": \"\",\n        \"Duration\": 30\n      }\n    },\n    \"CampaignCode\": \"\",\n    \"FreeTextMessage\": \"Kontroll uten aktivering\",\n    \"CategoryDescription\": \"Kontroll uten aktivering\",\n    \"CategoryCode\": 200\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The bookings associated with the guardian's patients.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c3fcea7f-1ae5-4c03-80fe-832006dc78ca",
+      "type": "http",
+      "documentation": "Get Timeslots for calendar month",
+      "method": "get",
+      "endpoint": "api/public/v1/timeslots",
+      "responses": [
+        {
+          "uuid": "ae0976fa-4509-4b6f-8f46-d15603554558",
+          "body": "[\n  {\n    \"ID\": 1,\n    \"Start\": \"2022-07-20T07:00:00\",\n    \"End\": \"2022-07-20T17:00:00\",\n    \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"ClinicianID\": 3,\n    \"TreatmentID\": 2208\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "8a59d728-549a-46e3-b0c4-6f7c98b3192f",
+      "type": "http",
+      "documentation": "Retrieve the most recently updated patient by the specified personal identification.",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification",
+      "responses": [
+        {
+          "uuid": "5f03a6ce-0255-4947-a3c9-d76cc7ab11df",
+          "body": "{\n  \"ID\": 642,\n  \"PatientPersonalIdentification\": 1994100314572,\n  \"PersonalNumber\": {\n    \"Year\": 1994,\n    \"Month\": 10,\n    \"Day\": 3,\n    \"ExtraDigits\": 14572,\n    \"IdFormat\": {{oneOf 0 1 2 3 4}},\n    \"Kind\": {{oneOf 0 1 2 3}},\n    \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n    \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n    \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n  },\n  \"FirstName\": \"Jack\",\n  \"LastName\": \"Jackson\",\n  \"Adress1\": \"Vei 1\",\n  \"Adress2\": \"Leilighet 2\",\n  \"PostalCode\": 7412,\n  \"City\": \"HASLUM\",\n  \"Email\": \"jack@gmail.com\",\n  \"MobilePhoneNumber\": 753951258,\n  \"GuardianPersonalNumber\": \"\",\n  \"MunicipalityCode\": 3024,\n  \"HomePhoneNumber\": 159753258,\n  \"WorkPhoneNumber\": 456987321,\n  \"ConsentToMarketing\": false,\n  \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n  \"ClinicianId\": 3,\n  \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n  \"HasContent\": {{faker 'datatype.boolean'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The most recently updated patient matching the specified personal identification.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2132b4e2-445b-4fcd-a6ba-5517d0d00284",
+      "type": "http",
+      "documentation": "Updates existing patient information.",
+      "method": "put",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification",
+      "responses": [
+        {
+          "uuid": "43253069-2ece-4b29-9c0b-898c825c7319",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7889ce87-fd9e-4c1c-8bce-428527ec138f",
+      "type": "http",
+      "documentation": "Searches for patients",
+      "method": "get",
+      "endpoint": "api/public/v1/patients",
+      "responses": [
+        {
+          "uuid": "97585a70-c0d6-49b5-bacb-e4b4824fcea5",
+          "body": "[\n  {\n    \"ID\": 642,\n    \"PatientPersonalIdentification\": 1994100314572,\n    \"PersonalNumber\": {\n      \"Year\": 1994,\n      \"Month\": 10,\n      \"Day\": 3,\n      \"ExtraDigits\": 14572,\n      \"IdFormat\": {{oneOf 0 1 2 3 4}},\n      \"Kind\": {{oneOf 0 1 2 3}},\n      \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n      \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n      \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n    },\n    \"FirstName\": \"Jack\",\n    \"LastName\": \"Jackson\",\n    \"Adress1\": \"Vei 1\",\n    \"Adress2\": \"Leilighet 2\",\n    \"PostalCode\": 7412,\n    \"City\": \"HASLUM\",\n    \"Email\": \"jack@gmail.com\",\n    \"MobilePhoneNumber\": 753951258,\n    \"GuardianPersonalNumber\": \"\",\n    \"MunicipalityCode\": 3024,\n    \"HomePhoneNumber\": 159753258,\n    \"WorkPhoneNumber\": 456987321,\n    \"ConsentToMarketing\": false,\n    \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"ClinicianId\": 3,\n    \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n    \"HasContent\": {{faker 'datatype.boolean'}}\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of patients matching the search criteria.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "9bb16c1a-5b33-4122-a359-ca7cbe8f05ea",
+      "type": "http",
+      "documentation": "Registers a new patient",
+      "method": "post",
+      "endpoint": "api/public/v1/patients",
+      "responses": [
+        {
+          "uuid": "61f94de2-9713-4a4c-b6b5-b27705b7920f",
+          "body": "{\n  \"ID\": 642,\n  \"PatientPersonalIdentification\": 1994100314572,\n  \"PersonalNumber\": {\n    \"Year\": 1994,\n    \"Month\": 10,\n    \"Day\": 3,\n    \"ExtraDigits\": 14572,\n    \"IdFormat\": {{oneOf 0 1 2 3 4}},\n    \"Kind\": {{oneOf 0 1 2 3}},\n    \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n    \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n    \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n  },\n  \"FirstName\": \"Jack\",\n  \"LastName\": \"Jackson\",\n  \"Adress1\": \"Vei 1\",\n  \"Adress2\": \"Leilighet 2\",\n  \"PostalCode\": 7412,\n  \"City\": \"HASLUM\",\n  \"Email\": \"jack@gmail.com\",\n  \"MobilePhoneNumber\": 753951258,\n  \"GuardianPersonalNumber\": \"\",\n  \"MunicipalityCode\": 3024,\n  \"HomePhoneNumber\": 159753258,\n  \"WorkPhoneNumber\": 456987321,\n  \"ConsentToMarketing\": false,\n  \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n  \"ClinicianId\": 3,\n  \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n  \"HasContent\": {{faker 'datatype.boolean'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The newly registered patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "ac691164-4033-464e-9b3c-a5e09aca06a4",
+      "type": "http",
+      "documentation": "Get patients bookings",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/bookings",
+      "responses": [
+        {
+          "uuid": "172cc126-b7c2-4e05-b21c-c9758460ffc5",
+          "body": "[\n  {\n    \"ID\": 1777,\n    \"Patient\": {\n      \"ID\": 642,\n      \"PatientPersonalIdentification\": 1994100314572,\n      \"PersonalNumber\": {\n        \"Year\": 1994,\n        \"Month\": 10,\n        \"Day\": 3,\n        \"ExtraDigits\": 14572,\n        \"IdFormat\": {{oneOf 0 1 2 3 4}},\n        \"Kind\": {{oneOf 0 1 2 3}},\n        \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n        \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n        \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n      },\n      \"FirstName\": \"Jack\",\n      \"LastName\": \"Jackson\",\n      \"Adress1\": \"Vei 1\",\n      \"Adress2\": \"Leilighet 2\",\n      \"PostalCode\": 7412,\n      \"City\": \"HASLUM\",\n      \"Email\": \"jack@gmail.com\",\n      \"MobilePhoneNumber\": 753951258,\n      \"GuardianPersonalNumber\": \"\",\n      \"MunicipalityCode\": 3024,\n      \"HomePhoneNumber\": 159753258,\n      \"WorkPhoneNumber\": 456987321,\n      \"ConsentToMarketing\": false,\n      \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianId\": 3,\n      \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n      \"HasContent\": {{faker 'datatype.boolean'}}\n    },\n    \"TimeSlot\": {\n      \"ID\": 1,\n      \"Start\": \"2022-07-20T07:00:00\",\n      \"End\": \"2022-07-20T17:00:00\",\n      \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianID\": 3,\n      \"TreatmentID\": 2208\n    },\n    \"CampaignCode\": \"\",\n    \"FreeTextMessage\": \"Kontroll uten aktivering\",\n    \"CategoryDescription\": \"Kontroll uten aktivering\",\n    \"CategoryCode\": 200\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of bookings for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f797ee5f-bcec-4d14-aeef-348092167c2e",
+      "type": "http",
+      "documentation": "Get extended bookings",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/bookings/extended",
+      "responses": [
+        {
+          "uuid": "0d3cefd9-f4b4-4438-aa68-657702d31f18",
+          "body": "[\n  {\n    \"ID\": 1777,\n    \"Patient\": {\n      \"ID\": 642,\n      \"PatientPersonalIdentification\": 1994100314572,\n      \"PersonalNumber\": {\n        \"Year\": 1994,\n        \"Month\": 10,\n        \"Day\": 3,\n        \"ExtraDigits\": 14572,\n        \"IdFormat\": {{oneOf 0 1 2 3 4}},\n        \"Kind\": {{oneOf 0 1 2 3}},\n        \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n        \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n        \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n      },\n      \"FirstName\": \"Jack\",\n      \"LastName\": \"Jackson\",\n      \"Adress1\": \"Vei 1\",\n      \"Adress2\": \"Leilighet 2\",\n      \"PostalCode\": 7412,\n      \"City\": \"HASLUM\",\n      \"Email\": \"jack@gmail.com\",\n      \"MobilePhoneNumber\": 753951258,\n      \"GuardianPersonalNumber\": \"\",\n      \"MunicipalityCode\": 3024,\n      \"HomePhoneNumber\": 159753258,\n      \"WorkPhoneNumber\": 456987321,\n      \"ConsentToMarketing\": false,\n      \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n      \"ClinicianId\": 3,\n      \"UpdatedOn\": \"{{faker 'date.recent' 365}}\",\n      \"HasContent\": {{faker 'datatype.boolean'}}\n    },\n    \"TimeSlot\": {\n      \"ID\": 1777,\n      \"Start\": \"2024-06-01T10:00:00\",\n      \"End\": \"2024-06-01T10:30:00\",\n      \"Clinic\": {\n        \"ID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n        \"Name\": \"Distriktstannklinikken i Lillevik AS\",\n        \"Address1\": \"Adresse 1 - Test 1\",\n        \"Address2\": \"Adresse 2\",\n        \"Postalcode\": \"0484\",\n        \"City\": \"Oslo\",\n        \"Home\": 12345679,\n        \"Work\": 12345679,\n        \"Fax\": \"\",\n        \"Mobile\": 91288888,\n        \"Email\": \"test@example.com\"\n      },\n      \"Clinician\": {\n        \"ID\": 471,\n        \"Name\": \"Hanne Maren Wildahl\",\n        \"Title\": \"Tannlege\",\n        \"Active\": true,\n        \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n        \"Info\": \"\"\n      },\n      \"Treatment\": {\n        \"ID\": 123,\n        \"Name\": \"Undersøkelse 30 min\",\n        \"Description\": \"\",\n        \"Duration\": 30\n      }\n    },\n    \"CampaignCode\": \"\",\n    \"FreeTextMessage\": \"Kontroll uten aktivering\",\n    \"CategoryDescription\": \"Kontroll uten aktivering\",\n    \"CategoryCode\": 200\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of extended bookings for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "40d1a0bc-adcc-43a9-9152-3cc29a20942d",
+      "type": "http",
+      "documentation": "Get guardians",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/guardians",
+      "responses": [
+        {
+          "uuid": "bb86d517-2f1e-4861-a562-1e67d070f1cc",
+          "body": "{\n  \"ID\": {{faker 'number.int' max=99999}},\n  \"PersonalNumber\": {\n    \"Year\": 1994,\n    \"Month\": 10,\n    \"Day\": 3,\n    \"ExtraDigits\": 14572,\n    \"IdFormat\": {{oneOf 0 1 2 3 4}},\n    \"Kind\": {{oneOf 0 1 2 3}},\n    \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n    \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n    \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n  },\n  \"FirstName\": \"\",\n  \"LastName\": \"\",\n  \"Adress1\": \"\",\n  \"Adress2\": \"\",\n  \"PostalCode\": \"\",\n  \"City\": \"\",\n  \"Email\": \"\",\n  \"MobilePhoneNumber\": \"\",\n  \"GuardianPersonalNumber\": \"\",\n  \"MunicipalityCode\": \"\",\n  \"Guardians\": [\n    {\n      \"PersonalNumber\": {\n        \"Year\": 1994,\n        \"Month\": 10,\n        \"Day\": 3,\n        \"ExtraDigits\": 14572,\n        \"IdFormat\": {{oneOf 0 1 2 3 4}},\n        \"Kind\": {{oneOf 0 1 2 3}},\n        \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n        \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n        \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n      },\n      \"FirstName\": \"\",\n      \"LastName\": \"\",\n      \"HasAccess\": {{faker 'datatype.boolean'}}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The specified patient with their guardians.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7ad87584-de0c-4a67-b50d-8d492dd08467",
+      "type": "http",
+      "documentation": "Get invoices for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/invoices",
+      "responses": [
+        {
+          "uuid": "bd846815-e99d-4244-9055-f6592def1078",
+          "body": "[\n  {\n    \"ID\": {{faker 'number.int' max=99999}},\n    \"Number\": {{faker 'number.int' max=99999}},\n    \"PersonalNumber\": \"\",\n    \"ClinicId\": \"\",\n    \"OcrNumber\": \"\",\n    \"InvoiceDate\": \"{{faker 'date.recent' 365}}\",\n    \"DueDate\": \"{{faker 'date.recent' 365}}\",\n    \"Status\": {{oneOf 0 1 2 3 4 5 -2 -1}},\n    \"TotalCost\": {{faker 'number.int' max=99999}},\n    \"IsFullyPaid\": {{faker 'datatype.boolean'}},\n    \"SocialInsuranceShare\": {{faker 'number.int' max=99999}},\n    \"VAT1\": {{faker 'number.int' max=99999}},\n    \"VAT2\": {{faker 'number.int' max=99999}},\n    \"InvoicedItems\": [\n      {\n        \"CreatedDate\": \"{{faker 'date.recent' 365}}\",\n        \"Text\": \"\",\n        \"Amount\": {{faker 'number.int' max=99999}},\n        \"VAT\": {{faker 'number.int' max=99999}},\n        \"VatRate\": {{faker 'number.int' max=99999}},\n        \"Vat1Amount\": {{faker 'number.int' max=99999}},\n        \"Vat2Amount\": {{faker 'number.int' max=99999}},\n        \"ProductNumber\": \"\",\n        \"ToothNumber\": {{faker 'number.int' max=99999}},\n        \"Surface\": \"\",\n        \"PriceCode\": \"\",\n        \"OriginalInvoiceNumber\": {{faker 'number.int' max=99999}},\n        \"PatientShare\": {{faker 'number.int' max=99999}},\n        \"SocialInsuranceAmount\": {{faker 'number.int' max=99999}},\n        \"IsReversal\": {{faker 'datatype.boolean'}}\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of invoices for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "5ccc1903-f56d-49e1-9b92-35074bd54f96",
+      "type": "http",
+      "documentation": "Get not exported invoices for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/invoices/unexported",
+      "responses": [
+        {
+          "uuid": "f8f06adb-cf37-47f2-af7d-eb5b73dfeb8b",
+          "body": "[\n  {\n    \"ID\": 123,\n    \"Number\": 222,\n    \"PersonalNumber\": 12345678901,\n    \"OCR\": \"\",\n    \"InvoiceDate\": \"2024-01-01T00:00:00\",\n    \"DueDate\": \"2024-01-15T00:00:00\",\n    \"Status\": 0,\n    \"PatientShare\": {{faker 'number.int' max=99999}},\n    \"SocialInsuranceShare\": {{faker 'number.int' max=99999}},\n    \"AmountExVAT1\": {{faker 'number.int' max=99999}},\n    \"AmountExVAT2\": {{faker 'number.int' max=99999}},\n    \"VAT1\": {{faker 'number.int' max=99999}},\n    \"VAT2\": {{faker 'number.int' max=99999}}\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of not exported invoices for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0e71201c-276d-4cdc-9b0a-eb9745e4620d",
+      "type": "http",
+      "documentation": "Get specific patient invoice",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/invoices/:InvoiceOnlineId",
+      "responses": [
+        {
+          "uuid": "dce0ac90-92a0-48ee-8d9e-e4f8792bf7cd",
+          "body": "{\n  \"Id\": \"\",\n  \"ClinicId\": \"\",\n  \"Guardian\": {\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"PersonalNumber\": \"\",\n    \"Birthdate\": \"{{faker 'date.recent' 365}}\",\n    \"SSN\": \"\",\n    \"Address1\": \"\",\n    \"Address2\": \"\",\n    \"City\": \"\",\n    \"Mobile\": \"\",\n    \"Telephone\": \"\",\n    \"Zip\": \"\",\n    \"Email\": \"\"\n  },\n  \"Patient\": {\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"PersonalNumber\": \"\",\n    \"Birthdate\": \"{{faker 'date.recent' 365}}\",\n    \"SSN\": \"\",\n    \"Address1\": \"\",\n    \"Address2\": \"\",\n    \"City\": \"\",\n    \"Mobile\": \"\",\n    \"Telephone\": \"\",\n    \"Zip\": \"\",\n    \"Email\": \"\",\n    \"CustomerNumber\": {{faker 'number.int' max=99999}}\n  },\n  \"OrganizationNumber\": \"\",\n  \"OrganizationName\": \"\",\n  \"OrganizationPhoneNumber\": \"\",\n  \"Organization\": {\n    \"Email\": \"\",\n    \"Address1\": \"\",\n    \"Address2\": \"\",\n    \"Zip\": \"\",\n    \"City\": \"\"\n  },\n  \"Type\": {{faker 'number.int' max=99999}},\n  \"Number\": \"\",\n  \"OriginalAmount\": {{faker 'number.float'}},\n  \"UnpaidAmount\": {{faker 'number.float'}},\n  \"Status\": {{oneOf 0 1 2 3 4 5 -2 -1}},\n  \"FullyPaid\": {{faker 'datatype.boolean'}},\n  \"SocialInsuranceShare\": {{faker 'number.float'}},\n  \"OcrNumber\": \"\",\n  \"AccountNumber\": \"\",\n  \"CustomerActor\": {\n    \"OrderReference\": \"\"\n  },\n  \"DueDate\": \"{{faker 'date.recent' 365}}\",\n  \"InvoiceDate\": \"{{faker 'date.recent' 365}}\",\n  \"VatSums\": [\n    {\n      \"Rate\": {{faker 'number.int' max=99999}},\n      \"AmountExVat\": {{faker 'number.int' max=99999}},\n      \"AmountIncVat\": {{faker 'number.int' max=99999}},\n      \"Vat\": {{faker 'number.int' max=99999}}\n    }\n  ],\n  \"Items\": [\n    {\n      \"Id\": {{faker 'number.int' max=99999}},\n      \"CreatedDate\": \"{{faker 'date.recent' 365}}\",\n      \"ClinicianLicenseId\": {{faker 'number.int' max=99999}},\n      \"Text\": \"\",\n      \"Amount\": {{faker 'number.int' max=99999}},\n      \"Vat\": {{faker 'number.int' max=99999}},\n      \"VatRate\": {{faker 'number.int' max=99999}},\n      \"ProductNumber\": \"\",\n      \"ToothNumber\": {{faker 'number.int' max=99999}},\n      \"Surface\": \"\",\n      \"PriceCode\": \"\",\n      \"OriginalInvoiceNumber\": {{faker 'number.int' max=99999}},\n      \"PatientShare\": {{faker 'number.int' max=99999}},\n      \"SocialInsuranceAmount\": {{faker 'number.int' max=99999}},\n      \"IsReversal\": {{faker 'datatype.boolean'}},\n      \"IsVat\": {{faker 'datatype.boolean'}},\n      \"AmountIncVat\": {{faker 'number.int' max=99999}}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The specified invoice for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2d25aae3-c8d4-4c70-8d81-0a7c57b5bcd4",
+      "type": "http",
+      "documentation": "Gets the cost estimates/quotes for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/quotes",
+      "responses": [
+        {
+          "uuid": "daa79307-528f-41c2-b6c5-7372fd2b3069",
+          "body": "[\n  {\n    \"Id\": 21,\n    \"Date\": \"2023-01-01T00:00:00\",\n    \"PrintoutText\": \"\",\n    \"PrintoutHeader\": \"\",\n    \"Insurance1StartValue\": {{faker 'number.int' max=99999}},\n    \"Insurance2StartValue\": {{faker 'number.int' max=99999}},\n    \"TotalAmount\": {{faker 'number.int' max=99999}},\n    \"EstimatedCost\": {{faker 'number.int' max=99999}},\n    \"TotalInsurance1\": {{faker 'number.int' max=99999}},\n    \"TotalInsurance2\": {{faker 'number.int' max=99999}},\n    \"GeneralToothSubsidy\": {{faker 'number.int' max=99999}},\n    \"TotalVAT\": {{faker 'number.int' max=99999}},\n    \"QuoteLine\": [\n      {\n        \"Tooth\": {{faker 'number.int' max=99999}},\n        \"Surface\": \"\",\n        \"PriceCode\": 108,\n        \"PriceType\": \"M\",\n        \"Duration\": {{faker 'number.int' max=99999}},\n        \"Text\": \"Utredning inklusive unders\\\\u00f6kning, utf\\\\u00f6rd av tandl\\\\u00e4kare\",\n        \"Amount\": 1775,\n        \"Insurance1\": {{faker 'number.int' max=99999}},\n        \"Insurance2\": {{faker 'number.int' max=99999}},\n        \"PatientShare\": 1775\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "[0..*] cost estimate entries for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0533bc96-c4ca-4b8d-8ff9-29da04e85aa9",
+      "type": "http",
+      "documentation": "Gets the latest health declaration for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/healthcare",
+      "responses": [
+        {
+          "uuid": "c8d72f71-362c-41e1-a001-897c7be23a0c",
+          "body": "{\n  \"Id\": 0,\n  \"PersonalNumber\": {\n    \"Year\": 1912,\n    \"Month\": 12,\n    \"Day\": 12,\n    \"ExtraDigits\": \"1212\"\n  },\n  \"RegistrationDate \": \"2022-07-07T08: 07:03.5911836Z \",\n  \"SignDate \": null,\n  \"MedicalTreatment \": false,\n  \"MTNotes \": null,\n  \"StateOfHealth \": null,\n  \"Cave \": false,\n  \"MedicationFreeText \": null,\n  \"Pregnant \": null,\n  \"LastTreatment \": null,\n  \"VisitCause \": null,\n  \"Notes \": null,\n  \"Locked \": false,\n  \"Invalid \": false,\n  \"InvalidationReason \": null,\n  \"HealthPropertiesList \": [\n    {\n      \"ID\": -1,\n      \"HealthId\": -1,\n      \"HealthField\": {\n        \"Id\": 45,\n        \"Name\": \"Hjärt-/kärlsjukdomar\",\n        \"Priority\": 1,\n        \"IsCave\": true,\n        \"Code\": 1000,\n        \"IsStandard\": true,\n        \"InUse\": true,\n        \"CreationDate\": \"0001-01-01T00:00:00\",\n        \"Type\": 1\n      },\n      \"HealthFieldId \": 45,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 46,\n        \"Name \": \"Högt blodtryck\",\n        \"Priority \": 2,\n        \"IsCave \": true,\n        \"Code \": 1010,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 46,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 47,\n        \"Name \": \"Diabetes \",\n        \"Priority \": 3,\n        \"IsCave \": true,\n        \"Code \": 1020,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 47,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 48,\n        \"Name \": \"Epilepsi \",\n        \"Priority \": 4,\n        \"IsCave \": true,\n        \"Code \": 1030,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 48,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 49,\n        \"Name \": \"Immunitetssjukdom \",\n        \"Priority \": 5,\n        \"IsCave \": true,\n        \"Code \": 1040,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 49,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 50,\n        \"Name \": \"Blodsmitta \",\n        \"Priority \": 6,\n        \"IsCave \": true,\n        \"Code \": 1050,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 50,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 52,\n        \"Name \": \"Öron/Näs/Hals \",\n        \"Priority \": 8,\n        \"IsCave \": false,\n        \"Code \": 1070,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 52,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 53,\n        \"Name \": \"Psykiska hälsoproblem\",\n        \"Priority \": 9,\n        \"IsCave \": false,\n        \"Code \": 1080,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 53,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 54,\n        \"Name \": \"Strålbehandlad \",\n        \"Priority \": 10,\n        \"IsCave \": true,\n        \"Code \": 1090,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 54,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 55,\n        \"Name \": \"Kost/Diet \",\n        \"Priority \": 11,\n        \"IsCave \": false,\n        \"Code \": 1100,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 55,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 56,\n        \"Name \": \"Kompl.efter tandbeh\",\n        \"Priority \": 12,\n        \"IsCave \": false,\n        \"Code \": 1110,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 56,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 57,\n        \"Name \": \"Röker/Snusar \",\n        \"Priority \": 13,\n        \"IsCave \": false,\n        \"Code \": 1120,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 57,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 58,\n        \"Name \": \"Astma \",\n        \"Priority \": 14,\n        \"IsCave \": false,\n        \"Code \": 1130,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 58,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 59,\n        \"Name \": \"Blödarsjuka \",\n        \"Priority \": 15,\n        \"IsCave \": true,\n        \"Code \": 1140,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 59,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 60,\n        \"Name \": \"Ätstörningar \",\n        \"Priority \": 16,\n        \"IsCave \": false,\n        \"Code \": 1150,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 60,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 61,\n        \"Name \": \"HIV/AIDS \",\n        \"Priority \": 17,\n        \"IsCave \": true,\n        \"Code \": 1160,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 61,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 62,\n        \"Name \": \"Lungsjukdom \",\n        \"Priority \": 18,\n        \"IsCave \": true,\n        \"Code \": 1170,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 62,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 63,\n        \"Name \": \"Hjärnblödning \",\n        \"Priority \": 19,\n        \"IsCave \": true,\n        \"Code \": 1180,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 63,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 64,\n        \"Name \": \"Parkinsons \",\n        \"Priority \": 20,\n        \"IsCave \": false,\n        \"Code \": 1190,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 64,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 65,\n        \"Name \": \"Cancer \",\n        \"Priority \": 21,\n        \"IsCave \": true,\n        \"Code \": 1200,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 65,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 66,\n        \"Name \": \"Reumatisk sjukdom\",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1210,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 66,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 67,\n        \"Name \": \"Annat \",\n        \"Priority \": 22,\n        \"IsCave \": true,\n        \"Code \": 1220,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 67,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 68,\n        \"Name \": \"Nedsatt syn\",\n        \"Priority \": 1,\n        \"IsCave \": false,\n        \"Code \": 1230,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 68,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 69,\n        \"Name \": \"Nedsatt hörsel\",\n        \"Priority \": 2,\n        \"IsCave \": false,\n        \"Code \": 1240,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 69,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 70,\n        \"Name \": \"Nedsatt talförmåga\",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1250,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 70,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 71,\n        \"Name \": \"Nedsatt rörlighet\",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1260,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 71,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 72,\n        \"Name \": \"Penicillin \",\n        \"Priority \": 1,\n        \"IsCave \": true,\n        \"Code \": 1270,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 72,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 73,\n        \"Name \": \"Lokalbedövning \",\n        \"Priority \": 2,\n        \"IsCave \": true,\n        \"Code \": 1280,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 73,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 74,\n        \"Name \": \"Pollen \",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1290,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 74,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 75,\n        \"Name \": \"Matvaror \",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1300,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 75,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 76,\n        \"Name \": \"Nickel \",\n        \"Priority \": 5,\n        \"IsCave \": false,\n        \"Code \": 1320,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 76,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 77,\n        \"Name \": \"Latex \",\n        \"Priority \": 6,\n        \"IsCave \": false,\n        \"Code \": 1330,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 77,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 78,\n        \"Name \": \"Annat \",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1340,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 78,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 79,\n        \"Name \": \"Blödande tandkött\",\n        \"Priority \": 1,\n        \"IsCave \": false,\n        \"Code \": 1350,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 79,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 80,\n        \"Name \": \"Dålig andedräkt\",\n        \"Priority \": 2,\n        \"IsCave \": false,\n        \"Code \": 1360,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 80,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 81,\n        \"Name \": \"Munsår \",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1370,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 81,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 82,\n        \"Name \": \"Muntorrhet \",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1380,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 82,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 83,\n        \"Name \": \"Bruxism(gnissla/pressa tänder) \",\n        \"Priority \": 5,\n        \"IsCave \": false,\n        \"Code \": 1390,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 83,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 84,\n        \"Name \": \"Ömma tuggmuskler\",\n        \"Priority \": 6,\n        \"IsCave \": false,\n        \"Code \": 1400,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 84,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 85,\n        \"Name \": \"Fingersugare \",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1410,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 85,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 86,\n        \"Name \": \"Munandare \",\n        \"Priority \": 8,\n        \"IsCave \": false,\n        \"Code \": 1420,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 86,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 87,\n        \"Name \": \"Annat \",\n        \"Priority \": 9,\n        \"IsCave \": false,\n        \"Code \": 1430,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 87,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 88,\n        \"Name \": \"Utan anmärkning\",\n        \"Priority \": 11,\n        \"IsCave \": false,\n        \"Code \": 1530,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 88,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 90,\n        \"Name \": \"Bubonic plague\",\n        \"Priority \": 24,\n        \"IsCave \": false,\n        \"Code \": 1550,\n        \"IsStandard \": false,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 90,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 91,\n        \"Name \": \"Smallpox \",\n        \"Priority \": 25,\n        \"IsCave \": false,\n        \"Code \": 1560,\n        \"IsStandard \": false,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 91,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    }\n  ],\n  \"Medications \": []\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Returns the patient's latest declaration if it exists, or a default empty declaration.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "7c00a675-d47b-478a-8e28-ae616504310c",
+      "type": "http",
+      "documentation": "Registers a health declaration for a patient",
+      "method": "patch",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/healthcare",
+      "responses": [
+        {
+          "uuid": "d41a7d69-90ab-4bfa-8f85-4620bf30e93e",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0f11041d-185e-444c-b18d-e62d3057b15b",
+      "type": "http",
+      "documentation": "Gets the latest health declaration for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/health-declaration",
+      "responses": [
+        {
+          "uuid": "479e1e45-29b1-4109-bc7e-55c2bb688eb9",
+          "body": "{\n  \"Id\": 0,\n  \"PersonalNumber\": {\n    \"Year\": 1912,\n    \"Month\": 12,\n    \"Day\": 12,\n    \"ExtraDigits\": \"1212\"\n  },\n  \"RegistrationDate \": \"2022-07-07T08: 07:03.5911836Z \",\n  \"SignDate \": null,\n  \"MedicalTreatment \": false,\n  \"MTNotes \": null,\n  \"StateOfHealth \": null,\n  \"Cave \": false,\n  \"MedicationFreeText \": null,\n  \"Pregnant \": null,\n  \"LastTreatment \": null,\n  \"VisitCause \": null,\n  \"Notes \": null,\n  \"Locked \": false,\n  \"Invalid \": false,\n  \"InvalidationReason \": null,\n  \"HealthPropertiesList \": [\n    {\n      \"ID\": -1,\n      \"HealthId\": -1,\n      \"HealthField\": {\n        \"Id\": 45,\n        \"Name\": \"Hjärt-/kärlsjukdomar\",\n        \"Priority\": 1,\n        \"IsCave\": true,\n        \"Code\": 1000,\n        \"IsStandard\": true,\n        \"InUse\": true,\n        \"CreationDate\": \"0001-01-01T00:00:00\",\n        \"Type\": 1\n      },\n      \"HealthFieldId \": 45,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 46,\n        \"Name \": \"Högt blodtryck\",\n        \"Priority \": 2,\n        \"IsCave \": true,\n        \"Code \": 1010,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 46,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 47,\n        \"Name \": \"Diabetes \",\n        \"Priority \": 3,\n        \"IsCave \": true,\n        \"Code \": 1020,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 47,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 48,\n        \"Name \": \"Epilepsi \",\n        \"Priority \": 4,\n        \"IsCave \": true,\n        \"Code \": 1030,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 48,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 49,\n        \"Name \": \"Immunitetssjukdom \",\n        \"Priority \": 5,\n        \"IsCave \": true,\n        \"Code \": 1040,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 49,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 50,\n        \"Name \": \"Blodsmitta \",\n        \"Priority \": 6,\n        \"IsCave \": true,\n        \"Code \": 1050,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 50,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 52,\n        \"Name \": \"Öron/Näs/Hals \",\n        \"Priority \": 8,\n        \"IsCave \": false,\n        \"Code \": 1070,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 52,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 53,\n        \"Name \": \"Psykiska hälsoproblem\",\n        \"Priority \": 9,\n        \"IsCave \": false,\n        \"Code \": 1080,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 53,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 54,\n        \"Name \": \"Strålbehandlad \",\n        \"Priority \": 10,\n        \"IsCave \": true,\n        \"Code \": 1090,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 54,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 55,\n        \"Name \": \"Kost/Diet \",\n        \"Priority \": 11,\n        \"IsCave \": false,\n        \"Code \": 1100,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 55,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 56,\n        \"Name \": \"Kompl.efter tandbeh\",\n        \"Priority \": 12,\n        \"IsCave \": false,\n        \"Code \": 1110,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 56,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 57,\n        \"Name \": \"Röker/Snusar \",\n        \"Priority \": 13,\n        \"IsCave \": false,\n        \"Code \": 1120,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 57,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 58,\n        \"Name \": \"Astma \",\n        \"Priority \": 14,\n        \"IsCave \": false,\n        \"Code \": 1130,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 58,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 59,\n        \"Name \": \"Blödarsjuka \",\n        \"Priority \": 15,\n        \"IsCave \": true,\n        \"Code \": 1140,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 59,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 60,\n        \"Name \": \"Ätstörningar \",\n        \"Priority \": 16,\n        \"IsCave \": false,\n        \"Code \": 1150,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 60,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 61,\n        \"Name \": \"HIV/AIDS \",\n        \"Priority \": 17,\n        \"IsCave \": true,\n        \"Code \": 1160,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 61,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 62,\n        \"Name \": \"Lungsjukdom \",\n        \"Priority \": 18,\n        \"IsCave \": true,\n        \"Code \": 1170,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 62,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 63,\n        \"Name \": \"Hjärnblödning \",\n        \"Priority \": 19,\n        \"IsCave \": true,\n        \"Code \": 1180,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 63,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 64,\n        \"Name \": \"Parkinsons \",\n        \"Priority \": 20,\n        \"IsCave \": false,\n        \"Code \": 1190,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 64,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 65,\n        \"Name \": \"Cancer \",\n        \"Priority \": 21,\n        \"IsCave \": true,\n        \"Code \": 1200,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 65,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 66,\n        \"Name \": \"Reumatisk sjukdom\",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1210,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 66,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 67,\n        \"Name \": \"Annat \",\n        \"Priority \": 22,\n        \"IsCave \": true,\n        \"Code \": 1220,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 67,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 68,\n        \"Name \": \"Nedsatt syn\",\n        \"Priority \": 1,\n        \"IsCave \": false,\n        \"Code \": 1230,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 68,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 69,\n        \"Name \": \"Nedsatt hörsel\",\n        \"Priority \": 2,\n        \"IsCave \": false,\n        \"Code \": 1240,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 69,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 70,\n        \"Name \": \"Nedsatt talförmåga\",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1250,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 70,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 71,\n        \"Name \": \"Nedsatt rörlighet\",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1260,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 0\n      },\n      \"HealthFieldId \": 71,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 72,\n        \"Name \": \"Penicillin \",\n        \"Priority \": 1,\n        \"IsCave \": true,\n        \"Code \": 1270,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 72,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 73,\n        \"Name \": \"Lokalbedövning \",\n        \"Priority \": 2,\n        \"IsCave \": true,\n        \"Code \": 1280,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 73,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 74,\n        \"Name \": \"Pollen \",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1290,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 74,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 75,\n        \"Name \": \"Matvaror \",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1300,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 75,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 76,\n        \"Name \": \"Nickel \",\n        \"Priority \": 5,\n        \"IsCave \": false,\n        \"Code \": 1320,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 76,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 77,\n        \"Name \": \"Latex \",\n        \"Priority \": 6,\n        \"IsCave \": false,\n        \"Code \": 1330,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 77,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 78,\n        \"Name \": \"Annat \",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1340,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 2\n      },\n      \"HealthFieldId \": 78,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 79,\n        \"Name \": \"Blödande tandkött\",\n        \"Priority \": 1,\n        \"IsCave \": false,\n        \"Code \": 1350,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 79,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 80,\n        \"Name \": \"Dålig andedräkt\",\n        \"Priority \": 2,\n        \"IsCave \": false,\n        \"Code \": 1360,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 80,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 81,\n        \"Name \": \"Munsår \",\n        \"Priority \": 3,\n        \"IsCave \": false,\n        \"Code \": 1370,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 81,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 82,\n        \"Name \": \"Muntorrhet \",\n        \"Priority \": 4,\n        \"IsCave \": false,\n        \"Code \": 1380,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 82,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 83,\n        \"Name \": \"Bruxism(gnissla/pressa tänder) \",\n        \"Priority \": 5,\n        \"IsCave \": false,\n        \"Code \": 1390,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 83,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 84,\n        \"Name \": \"Ömma tuggmuskler\",\n        \"Priority \": 6,\n        \"IsCave \": false,\n        \"Code \": 1400,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 84,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 85,\n        \"Name \": \"Fingersugare \",\n        \"Priority \": 7,\n        \"IsCave \": false,\n        \"Code \": 1410,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 85,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 86,\n        \"Name \": \"Munandare \",\n        \"Priority \": 8,\n        \"IsCave \": false,\n        \"Code \": 1420,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 86,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 87,\n        \"Name \": \"Annat \",\n        \"Priority \": 9,\n        \"IsCave \": false,\n        \"Code \": 1430,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 87,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 88,\n        \"Name \": \"Utan anmärkning\",\n        \"Priority \": 11,\n        \"IsCave \": false,\n        \"Code \": 1530,\n        \"IsStandard \": true,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 3\n      },\n      \"HealthFieldId \": 88,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 90,\n        \"Name \": \"Bubonic plague\",\n        \"Priority \": 24,\n        \"IsCave \": false,\n        \"Code \": 1550,\n        \"IsStandard \": false,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 90,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    },\n    {\n      \"ID \": -1,\n      \"HealthId \": -1,\n      \"HealthField \": {\n        \"Id \": 91,\n        \"Name \": \"Smallpox \",\n        \"Priority \": 25,\n        \"IsCave \": false,\n        \"Code \": 1560,\n        \"IsStandard \": false,\n        \"InUse \": true,\n        \"CreationDate \": \"0001-01-01T00:00:00 \",\n        \"Type \": 1\n      },\n      \"HealthFieldId \": 91,\n      \"PropertyValue \": false,\n      \"PropertyCode \": 0,\n      \"IsEarlierCondition \": false,\n      \"PropNB \": null\n    }\n  ],\n  \"Medications \": []\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Returns the patient's latest declaration if it exists, or a default empty declaration.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "5d944a1d-3342-40cd-a4be-9f18e8de665c",
+      "type": "http",
+      "documentation": "Registers a health declaration for a patient",
+      "method": "patch",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/health-declaration",
+      "responses": [
+        {
+          "uuid": "4b73f35d-82e5-416e-9f4d-d27552a621fb",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "42cf3b5c-448a-44e1-975e-d5b60553fd09",
+      "type": "http",
+      "documentation": "Gets the prescriptions for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/prescriptions",
+      "responses": [
+        {
+          "uuid": "071f8097-f6be-4981-a52b-231cd712f854",
+          "body": "[\n  {\n    \"Id\": 6661,\n    \"Prescriber\": {\n      \"ID\": 471,\n      \"Name\": \"Hanne Maren Wildahl\",\n      \"Title\": \"Tannlege\",\n      \"Active\": true,\n      \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n      \"Info\": \"\"\n    },\n    \"IsElectronicPresciption\": false,\n    \"IssueDate\": \"2023-01-01T00:00:00\",\n    \"PrescriptionText\": \"Prescription: Ibuprofen\\\\r\\\\nMedicine type: Painkiller\\\\r\\\\nStrength: 50\\\\r\\\\nQuantity/Treatm. period: mg\\\\r\\\\nDosage/Usage/Purpose: As needed.\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "[0..*] prescriptions for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c83f891a-521b-45f7-9571-ad59c6cade8a",
+      "type": "http",
+      "documentation": "Gets the referrals for a patient",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/referrals",
+      "responses": [
+        {
+          "uuid": "0d7a235d-dcca-42ec-a489-48178eb518ef",
+          "body": "[\n  {\n    \"Title\": \"Sent electronic remittance to: City Praktiken | Allm\\\\u00e4n tandhälsa\",\n    \"Created\": \"2023-01-01T00:00:00\",\n    \"ValidTo\": \"2023-12-31T23:59:59\",\n    \"Clinician\": {\n      \"ID\": 471,\n      \"Name\": \"Hanne Maren Wildahl\",\n      \"Title\": \"Tannlege\",\n      \"Active\": true,\n      \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n      \"Info\": \"\"\n    }\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "[0..*] referrals for the specified patient.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "72ba9117-7791-47ee-b9cc-4bedcf13b6f2",
+      "type": "http",
+      "documentation": "Gets the treatments for a specific tooth",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/teeth/:toothNumber/treatments",
+      "responses": [
+        {
+          "uuid": "0c85fb3a-0748-4726-bb10-bff66177221a",
+          "body": "[\n  {\n    \"ClinicId\": 19,\n    \"ClinicianId\": 13,\n    \"ClinicianName\": \"John Doe\",\n    \"RegisteredDate\": \"2022-07-07T13:52:28\",\n    \"TreatmentDate\": \"2025-07-07T13:52:28\",\n    \"Text\": \"Fyllning av en yta på framtand eller hörntand\",\n    \"SurfaceDescription\": \"P\",\n    \"InsuranceCode\": \"701 / 4001\",\n    \"PriceType\": \"M\",\n    \"ShareType\": \"P\",\n    \"TechnicianAmount\": 0,\n    \"Amount\": 635,\n    \"IsSigned\": false,\n    \"CalculatedReferencePrice\": 0,\n    \"ReferencePrice\": 0\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "[0..*] registered treatments applied to a specific tooth from the patient's journal.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "b1117869-ad32-4749-9c66-7967446f189b",
+      "type": "http",
+      "documentation": "Gets the patient's current teeth and their status",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/teeth/status",
+      "responses": [
+        {
+          "uuid": "07dac555-6d50-4fac-813b-305001ad2acf",
+          "body": "[\n  {\n    \"StatusUpdated\": \"2022-07-07T13:52:28\",\n    \"ToothNumber\": 33,\n    \"Status\": 2\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The current set of patient teeth, as well as their status.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "4b44936d-0d69-4b0e-99b9-5a4e31398fb7",
+      "type": "http",
+      "documentation": "Gets a complete journal printout",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/journal/printout",
+      "responses": [
+        {
+          "uuid": "b9b73a09-6224-44b6-bd7c-ed7bbebee8c9",
+          "body": "[\n  {\n    \"RecordGroup\": \"Misc\",\n    \"Status\": \"P\",\n    \"ClinicId\": 19,\n    \"ClinicianId\": 3,\n    \"ClinicianName\": \"0001-John Doe\",\n    \"CreatedDate\": \"2022-05-31T12:04:15.58\",\n    \"TreatmentDate\": \"2022-05-31T12:04:10.58\",\n    \"DisplayedDate\": \"2022-05-31\",\n    \"Text\": \"[a] Konsultation specialisttandvård\",\n    \"Surface\": null,\n    \"Tooth\": null,\n    \"InsuranceCode\": \"115/1301\",\n    \"PriceType\": \"H\",\n    \"DebitedTime\": null,\n    \"ShareType\": \"P\",\n    \"TechnicianAmount\": null,\n    \"Amount\": 0,\n    \"IsSigned\": false,\n    \"CalculatedReferencePrice\": 0,\n    \"ReferencePrice\": 0\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "1229e669-62ee-4e82-8ab6-bbd4c1146938",
+      "type": "http",
+      "documentation": "Adds a free text journal row record to the patients journal",
+      "method": "post",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/journal/freeTextRow",
+      "responses": [
+        {
+          "uuid": "ff373106-dd5a-4d1f-a6d4-973116abfddb",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "71df1525-c6e5-46b7-9c11-f05e0247ba6c",
+      "type": "http",
+      "documentation": "Gets the patient SIO details",
+      "method": "get",
+      "endpoint": "api/public/v1/patients/:patientPersonalIdentification/siodetails",
+      "responses": [
+        {
+          "uuid": "19184ed9-b2f9-4874-b2f0-63b28e68f1f9",
+          "body": "{\n  \"PatientSSN\": {\n    \"Year\": 1994,\n    \"Month\": 10,\n    \"Day\": 3,\n    \"ExtraDigits\": 14572,\n    \"IdFormat\": {{oneOf 0 1 2 3 4}},\n    \"Kind\": {{oneOf 0 1 2 3}},\n    \"BirthDate\": \"{{faker 'date.recent' 365}}\",\n    \"AreExtraDigitsSpecified\": {{faker 'datatype.boolean'}},\n    \"IsBirthDateValid\": {{faker 'datatype.boolean'}}\n  },\n  \"IsEligible\": {{faker 'datatype.boolean'}},\n  \"HighCostAmount\": {{faker 'number.int' max=99999}},\n  \"ATB1\": {\n    \"From\": \"{{faker 'date.recent' 365}}\",\n    \"To\": \"{{faker 'date.recent' 365}}\",\n    \"IsUsed\": {{faker 'datatype.boolean'}},\n    \"Amount\": {{faker 'number.int' max=99999}},\n    \"IsAvailable\": {{faker 'datatype.boolean'}}\n  },\n  \"ATB2\": {\n    \"From\": \"{{faker 'date.recent' 365}}\",\n    \"To\": \"{{faker 'date.recent' 365}}\",\n    \"IsUsed\": {{faker 'datatype.boolean'}},\n    \"Amount\": {{faker 'number.int' max=99999}},\n    \"IsAvailable\": {{faker 'datatype.boolean'}}\n  },\n  \"STB\": {\n    \"Amount\": {{faker 'number.int' max=99999}},\n    \"From\": \"{{faker 'date.recent' 365}}\",\n    \"To\": \"{{faker 'date.recent' 365}}\",\n    \"Id\": \"\"\n  },\n  \"LastCheckedDate\": \"{{faker 'date.recent' 365}}\",\n  \"LastTreatmentDate\": \"{{faker 'date.recent' 365}}\",\n  \"HighCostStartDate\": \"{{faker 'date.recent' 365}}\",\n  \"HighCostEndDate\": \"{{faker 'date.recent' 365}}\",\n  \"Registration\": \"\",\n  \"IsRegistered\": {{faker 'datatype.boolean'}}\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "06f080b8-ded8-4bd8-9b52-cf8c312d92e1",
+      "type": "http",
+      "documentation": "Get company invoice",
+      "method": "get",
+      "endpoint": "api/public/v1/companies/invoices/:InvoiceOnlineId",
+      "responses": [
+        {
+          "uuid": "0575aaf2-253b-42ac-b683-6c5019533be3",
+          "body": "{\n  \"Id\": \"\",\n  \"ClinicId\": \"\",\n  \"Company\": {\n    \"Name\": \"\",\n    \"OrganizationNumber\": \"\",\n    \"Address1\": \"\",\n    \"Address2\": \"\",\n    \"City\": \"\",\n    \"Mobile\": \"\",\n    \"Telephone\": \"\",\n    \"Zip\": \"\"\n  },\n  \"OrganizationName\": \"\",\n  \"OrganizationNumber\": \"\",\n  \"OrganizationPhoneNumber\": \"\",\n  \"Organization\": {\n    \"Email\": \"\",\n    \"Address1\": \"\",\n    \"Address2\": \"\",\n    \"Zip\": \"\",\n    \"City\": \"\"\n  },\n  \"Type\": {{faker 'number.int' max=99999}},\n  \"Number\": \"\",\n  \"OriginalAmount\": {{faker 'number.float'}},\n  \"UnpaidAmount\": {{faker 'number.float'}},\n  \"PatientAmount\": {{faker 'number.float'}},\n  \"Status\": {{oneOf 0 1 2 3 4 5 -2 -1}},\n  \"FullyPaid\": {{faker 'datatype.boolean'}},\n  \"SocialInsuranceShare\": {{faker 'number.float'}},\n  \"OcrNumber\": \"\",\n  \"AccountNumber\": \"\",\n  \"DueDate\": \"{{faker 'date.recent' 365}}\",\n  \"InvoiceDate\": \"{{faker 'date.recent' 365}}\",\n  \"CustomerActor\": {\n    \"EHFReference\": \"\"\n  },\n  \"Items\": [\n    {\n      \"Id\": {{faker 'number.int' max=99999}},\n      \"CreatedDate\": \"{{faker 'date.recent' 365}}\",\n      \"ClinicianLicenseId\": {{faker 'number.int' max=99999}},\n      \"Text\": \"\",\n      \"Amount\": {{faker 'number.int' max=99999}},\n      \"OriginalInvoiceNumber\": {{faker 'number.int' max=99999}},\n      \"IsReversal\": {{faker 'datatype.boolean'}}\n    }\n  ],\n  \"ReferredInvoices\": [\n    {\n      \"Id\": \"\",\n      \"ClinicId\": \"\",\n      \"Guardian\": {\n        \"FirstName\": \"\",\n        \"LastName\": \"\",\n        \"PersonalNumber\": \"\",\n        \"Birthdate\": \"{{faker 'date.recent' 365}}\",\n        \"SSN\": \"\",\n        \"Address1\": \"\",\n        \"Address2\": \"\",\n        \"City\": \"\",\n        \"Mobile\": \"\",\n        \"Telephone\": \"\",\n        \"Zip\": \"\",\n        \"Email\": \"\"\n      },\n      \"Patient\": {\n        \"FirstName\": \"\",\n        \"LastName\": \"\",\n        \"PersonalNumber\": \"\",\n        \"Birthdate\": \"{{faker 'date.recent' 365}}\",\n        \"SSN\": \"\",\n        \"Address1\": \"\",\n        \"Address2\": \"\",\n        \"City\": \"\",\n        \"Mobile\": \"\",\n        \"Telephone\": \"\",\n        \"Zip\": \"\",\n        \"Email\": \"\",\n        \"CustomerNumber\": {{faker 'number.int' max=99999}}\n      },\n      \"OrganizationNumber\": \"\",\n      \"OrganizationName\": \"\",\n      \"OrganizationPhoneNumber\": \"\",\n      \"Organization\": {\n        \"Email\": \"\",\n        \"Address1\": \"\",\n        \"Address2\": \"\",\n        \"Zip\": \"\",\n        \"City\": \"\"\n      },\n      \"Type\": {{faker 'number.int' max=99999}},\n      \"Number\": \"\",\n      \"OriginalAmount\": {{faker 'number.float'}},\n      \"UnpaidAmount\": {{faker 'number.float'}},\n      \"Status\": {{oneOf 0 1 2 3 4 5 -2 -1}},\n      \"FullyPaid\": {{faker 'datatype.boolean'}},\n      \"SocialInsuranceShare\": {{faker 'number.float'}},\n      \"OcrNumber\": \"\",\n      \"AccountNumber\": \"\",\n      \"CustomerActor\": {\n        \"OrderReference\": \"\"\n      },\n      \"DueDate\": \"{{faker 'date.recent' 365}}\",\n      \"InvoiceDate\": \"{{faker 'date.recent' 365}}\",\n      \"VatSums\": [\n        {\n          \"Rate\": {{faker 'number.int' max=99999}},\n          \"AmountExVat\": {{faker 'number.int' max=99999}},\n          \"AmountIncVat\": {{faker 'number.int' max=99999}},\n          \"Vat\": {{faker 'number.int' max=99999}}\n        }\n      ],\n      \"Items\": [\n        {\n          \"Id\": {{faker 'number.int' max=99999}},\n          \"CreatedDate\": \"{{faker 'date.recent' 365}}\",\n          \"ClinicianLicenseId\": {{faker 'number.int' max=99999}},\n          \"Text\": \"\",\n          \"Amount\": {{faker 'number.int' max=99999}},\n          \"Vat\": {{faker 'number.int' max=99999}},\n          \"VatRate\": {{faker 'number.int' max=99999}},\n          \"ProductNumber\": \"\",\n          \"ToothNumber\": {{faker 'number.int' max=99999}},\n          \"Surface\": \"\",\n          \"PriceCode\": \"\",\n          \"OriginalInvoiceNumber\": {{faker 'number.int' max=99999}},\n          \"PatientShare\": {{faker 'number.int' max=99999}},\n          \"SocialInsuranceAmount\": {{faker 'number.int' max=99999}},\n          \"IsReversal\": {{faker 'datatype.boolean'}},\n          \"IsVat\": {{faker 'datatype.boolean'}},\n          \"AmountIncVat\": {{faker 'number.int' max=99999}}\n        }\n      ]\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The details of the specified company invoice.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "e52d3eb8-345d-4b61-b075-8f9e4e519fe4",
+      "type": "http",
+      "documentation": "List all clinics",
+      "method": "get",
+      "endpoint": "api/public/v1/clinics",
+      "responses": [
+        {
+          "uuid": "03e51939-59f4-4847-a5d6-cc8ce2a3631f",
+          "body": "[\n  {\n    \"ID\": \"477-430e9776-423d-4f86-8741-00f779421e6e\",\n    \"Name\": \"Distriktstannklinikken i Lillevik AS\",\n    \"Address1\": \"Adresse 1 - Test\",\n    \"Address2\": \"Adresse 2 - Test\",\n    \"Postalcode\": \"0484\",\n    \"City\": \"OSLO\",\n    \"Home\": 12345679,\n    \"Work\": 12345678,\n    \"Fax\": \"\",\n    \"Mobile\": 91288888,\n    \"Email\": \"epost@opusdtenl.com\",\n    \"Group\": \"\",\n    \"Clinicians\": [\n      {\n        \"ID\": 471,\n        \"Name\": \"Hanne Maren Wildahl\",\n        \"Title\": \"Tannlege\",\n        \"Active\": true,\n        \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n        \"Info\": \"\"\n      }\n    ]\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of clinics.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "3be5cb75-aec9-443d-9193-107cbedc6991",
+      "type": "http",
+      "documentation": "Retrieves the specific clinic",
+      "method": "get",
+      "endpoint": "api/public/v1/clinics/:clinicOnlineId",
+      "responses": [
+        {
+          "uuid": "34a37357-a2ba-4ac6-a543-e9d12dded51d",
+          "body": "{\n  \"ID\": \"477-430e9776-423d-4f86-8741-00f779421e6e\",\n  \"Name\": \"Distriktstannklinikken i Lillevik AS\",\n  \"Address1\": \"Adresse 1 - Test\",\n  \"Address2\": \"Adresse 2 - Test\",\n  \"Postalcode\": \"0484\",\n  \"City\": \"OSLO\",\n  \"Home\": 12345679,\n  \"Work\": 12345678,\n  \"Fax\": \"\",\n  \"Mobile\": 91288888,\n  \"Email\": \"epost@opusdtenl.com\",\n  \"Group\": \"\",\n  \"Clinicians\": [\n    {\n      \"ID\": 471,\n      \"Name\": \"Hanne Maren Wildahl\",\n      \"Title\": \"Tannlege\",\n      \"Active\": true,\n      \"ClinicID\": \"477-a2976113-acea-468f-bf2b-70c55436386f\",\n      \"Info\": \"\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The details for the specified clinic.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "9cfe6dd8-b36c-49cb-94ab-45494aeb2313",
+      "type": "http",
+      "documentation": "List clinics' bank account numbers",
+      "method": "get",
+      "endpoint": "api/public/v1/clinics/bank-account-numbers",
+      "responses": [
+        {
+          "uuid": "e568a6dd-a7b1-4251-8e2f-59dfe4054ecb",
+          "body": "[\n  {\n    \"ClinicId\": \"\",\n    \"AccountNumber\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of clinic - bank account number pairs.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "34f200db-432f-43e5-b6e0-61d397114ea5",
+      "type": "http",
+      "documentation": "Register patient arrival at clinic",
+      "method": "patch",
+      "endpoint": "api/public/v1/clinics/:clinicId/patients/:patientPersonalIdentification/arrival",
+      "responses": [
+        {
+          "uuid": "81e56d8f-d9f6-4b4a-ae76-50eb1555c6c4",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0de43ba9-f637-4def-9787-d4e79b0a4be3",
+      "type": "http",
+      "documentation": "List exportable invoices",
+      "method": "get",
+      "endpoint": "api/public/v1/clinics/:clinicOnlineId/invoices/exportable",
+      "responses": [
+        {
+          "uuid": "976b7f51-aa46-49af-b567-892770d4f119",
+          "body": "[\n  {\n    \"InvoiceId\": 123,\n    \"ClinicId\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"CustomerDebitorType\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "A list of exportable invoices for the specified clinic.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6cbe17be-dedf-4f84-ab02-896af7fa86d2",
+      "type": "http",
+      "documentation": "Register settlement",
+      "method": "post",
+      "endpoint": "api/public/v1/clinics/:clinicOnlineId/settlements",
+      "responses": [
+        {
+          "uuid": "66464a96-fd82-4eed-9417-36b0fc24b6a2",
+          "body": "{\n  \"Id\": {{faker 'number.int' max=99999}},\n  \"ClinicId\": \"\",\n  \"IsProcessed\": {{faker 'datatype.boolean'}},\n  \"Status\": \"{{oneOf 'NotProcessed' 'Rejected' 'Finished' 'Error'}}\",\n  \"StatusDescription\": \"\",\n  \"ReceivedOn\": \"{{faker 'date.recent' 365}}\",\n  \"ProcessedOn\": \"{{faker 'date.recent' 365}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The newly registered settlement for the specified clinic.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "153be245-a247-4a08-b077-ce37ab758c59",
+      "type": "http",
+      "documentation": "View settlement",
+      "method": "get",
+      "endpoint": "api/public/v1/clinics/:clinicOnlineId/settlements/:id",
+      "responses": [
+        {
+          "uuid": "c894ca16-b90a-4852-bbfc-0d235c4f2196",
+          "body": "{\n  \"Id\": {{faker 'number.int' max=99999}},\n  \"ClinicId\": \"\",\n  \"IsProcessed\": {{faker 'datatype.boolean'}},\n  \"Status\": \"{{oneOf 'NotProcessed' 'Rejected' 'Finished' 'Error'}}\",\n  \"StatusDescription\": \"\",\n  \"ReceivedOn\": \"{{faker 'date.recent' 365}}\",\n  \"ProcessedOn\": \"{{faker 'date.recent' 365}}\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "The details of the specified settlement for the specified clinic.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "818147bd-c60b-4ff3-a6ac-0f15b12c5f89",
+      "type": "http",
+      "documentation": "Make a reservation",
+      "method": "put",
+      "endpoint": "api/public/v1/reservations",
+      "responses": [
+        {
+          "uuid": "408f47f7-fd38-4398-a791-bb172b829558",
+          "body": "{{faker 'number.int' max=99999}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0470ac02-44ed-4073-a777-43708f505baf",
+      "type": "http",
+      "documentation": "Delete reservation",
+      "method": "delete",
+      "endpoint": "api/public/v1/reservations/:reservationId",
+      "responses": [
+        {
+          "uuid": "1d86de7c-f58d-4f1f-8286-a311439440e0",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "51e298ab-6491-41d8-9ade-2a4db354ad37",
+      "type": "http",
+      "documentation": "Is specified time available",
+      "method": "get",
+      "endpoint": "api/public/v1/reservations/available",
+      "responses": [
+        {
+          "uuid": "e5fd13dc-c0c8-4d95-b628-c9140396d1a7",
+          "body": "{{faker 'datatype.boolean'}}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "f0b4493a-00f5-4a97-9e67-56fd8b58cb3c",
+      "type": "http",
+      "documentation": "Get revenue per patient for a given year.",
+      "method": "get",
+      "endpoint": "api/public/v1/bi/revenue/year/:year",
+      "responses": [
+        {
+          "uuid": "18f1bf9a-88d6-4812-94b7-d830de037ee1",
+          "body": "[\n  {\n    \"PatientId\": \"\",\n    \"TreatmentDate\": \"\",\n    \"Amount\": {{faker 'number.int' max=99999}},\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"PhoneMobile\": \"\",\n    \"PhoneHome\": \"\",\n    \"PhoneWork\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Returns a list of revenue per patient for a given year.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "cc2f9033-c670-4a3c-9868-cac15097ec80",
+      "type": "http",
+      "documentation": "Get patients bookings",
+      "method": "get",
+      "endpoint": "api/public/v1/bi/bookings",
+      "responses": [
+        {
+          "uuid": "755b84e0-eb85-4752-9cc9-796cc94d1903",
+          "body": "[\n  {\n    \"PatientId\": \"\",\n    \"FirstName\": \"\",\n    \"LastName\": \"\",\n    \"Email\": \"\",\n    \"PhoneMobile\": \"\",\n    \"PhoneHome\": \"\",\n    \"PhoneWork\": \"\",\n    \"CountryCode\": \"\",\n    \"AppointmentStart\": \"{{faker 'date.recent' 365}}\",\n    \"ClinicianId\": {{faker 'number.int' max=99999}},\n    \"ClinicId\": \"\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Returns a list of patient bookings.",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "6297138e-81aa-4066-a79d-6667b4205cd5",
+      "type": "http",
+      "documentation": "Get available times overview",
+      "method": "get",
+      "endpoint": "api/public/v1/appointments/schedule/overview/availabletimes",
+      "responses": [
+        {
+          "uuid": "1308d662-cce1-4b7f-a45c-31c50e2adefd",
+          "body": "[\n  {\n    \"ID\": 1,\n    \"Start\": \"2022-07-20T07:00:00\",\n    \"End\": \"2022-07-20T17:00:00\",\n    \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"ClinicianID\": 3,\n    \"TreatmentID\": 2208\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of available timeslots for the requested interval",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "cd2161d4-99b4-4292-8bfa-f5a51abd1bd4",
+      "type": "http",
+      "documentation": "Get available time",
+      "method": "get",
+      "endpoint": "api/public/v1/appointments/schedule/availabletimes",
+      "responses": [
+        {
+          "uuid": "db3c4bd9-82ff-440d-bb81-e79f542da6bd",
+          "body": "[\n  {\n    \"ID\": 1,\n    \"Start\": \"2022-07-20T07:00:00\",\n    \"End\": \"2022-07-20T17:00:00\",\n    \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"ClinicianID\": 3,\n    \"TreatmentID\": 2208\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of available timeslots for the requested interval",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "a4f6d5fb-4573-468d-971d-4ee3c17d19c7",
+      "type": "http",
+      "documentation": "Get available time for reschedule",
+      "method": "get",
+      "endpoint": "api/public/v1/appointments/reschedule/availabletimes",
+      "responses": [
+        {
+          "uuid": "f27467a7-0b1a-4d41-80d5-5604cc67f38d",
+          "body": "[\n  {\n    \"ID\": 1,\n    \"Start\": \"2022-07-20T07:00:00\",\n    \"End\": \"2022-07-20T17:00:00\",\n    \"ClinicID\": \"19-2ca4a5e2-957a-4432-9370-c7b707042353\",\n    \"ClinicianID\": 3,\n    \"TreatmentID\": 2208\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of available timeslots for the requested interval",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "a298430b-59e8-405c-9d11-89f1a4170793",
+      "type": "http",
+      "documentation": "Get Treatments",
+      "method": "get",
+      "endpoint": "api/public/v1/treatments",
+      "responses": [
+        {
+          "uuid": "1f718a14-b471-4310-ba27-5c3a6c2999e7",
+          "body": "[\n  {\n    \"ID\": 123,\n    \"Name\": \"Undersøkelse 30 min\",\n    \"Description\": \"\",\n    \"Duration\": 30\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "List of treatments",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "4987a9bf-95d2-4e50-8105-93a9073b13af"
+    },
+    {
+      "type": "route",
+      "uuid": "96612c5a-930e-4abe-9caf-2b947c9d5995"
+    },
+    {
+      "type": "route",
+      "uuid": "10c92f00-b06c-4673-9283-2d4c328a8e58"
+    },
+    {
+      "type": "route",
+      "uuid": "8ae7d9c9-97f5-49b2-8251-eb44b859f251"
+    },
+    {
+      "type": "route",
+      "uuid": "9574c038-9218-4aca-a350-d9c165def28d"
+    },
+    {
+      "type": "route",
+      "uuid": "608c5bff-054c-42ed-8c7f-bfc88bdf712f"
+    },
+    {
+      "type": "route",
+      "uuid": "6f8e7ea8-f314-4cf5-b8b2-5aa75982516c"
+    },
+    {
+      "type": "route",
+      "uuid": "5ab6aeb3-c1f9-4527-b953-1798a7b61ea1"
+    },
+    {
+      "type": "route",
+      "uuid": "6bf1a513-c09f-470c-b20e-10c359c2cc1e"
+    },
+    {
+      "type": "route",
+      "uuid": "1c711564-cfd2-41d5-b959-911bb00fd4de"
+    },
+    {
+      "type": "route",
+      "uuid": "1985550a-6bd3-46bd-bc2f-d769292f199e"
+    },
+    {
+      "type": "route",
+      "uuid": "06dec694-8b4c-4a12-99ee-73e1def76c60"
+    },
+    {
+      "type": "route",
+      "uuid": "0970b2df-60dd-4c77-b8d3-1e96a48c7438"
+    },
+    {
+      "type": "route",
+      "uuid": "8e47f6df-1c01-406a-b27e-6e8df84fb8ac"
+    },
+    {
+      "type": "route",
+      "uuid": "5514d212-60aa-4105-9b8e-61c28e54d6c9"
+    },
+    {
+      "type": "route",
+      "uuid": "d723cd61-ea39-4eb4-b664-90d209f64d4f"
+    },
+    {
+      "type": "route",
+      "uuid": "3d6f732a-e894-42e4-aad7-36576e115f23"
+    },
+    {
+      "type": "route",
+      "uuid": "c3fcea7f-1ae5-4c03-80fe-832006dc78ca"
+    },
+    {
+      "type": "route",
+      "uuid": "8a59d728-549a-46e3-b0c4-6f7c98b3192f"
+    },
+    {
+      "type": "route",
+      "uuid": "2132b4e2-445b-4fcd-a6ba-5517d0d00284"
+    },
+    {
+      "type": "route",
+      "uuid": "7889ce87-fd9e-4c1c-8bce-428527ec138f"
+    },
+    {
+      "type": "route",
+      "uuid": "9bb16c1a-5b33-4122-a359-ca7cbe8f05ea"
+    },
+    {
+      "type": "route",
+      "uuid": "ac691164-4033-464e-9b3c-a5e09aca06a4"
+    },
+    {
+      "type": "route",
+      "uuid": "f797ee5f-bcec-4d14-aeef-348092167c2e"
+    },
+    {
+      "type": "route",
+      "uuid": "40d1a0bc-adcc-43a9-9152-3cc29a20942d"
+    },
+    {
+      "type": "route",
+      "uuid": "7ad87584-de0c-4a67-b50d-8d492dd08467"
+    },
+    {
+      "type": "route",
+      "uuid": "5ccc1903-f56d-49e1-9b92-35074bd54f96"
+    },
+    {
+      "type": "route",
+      "uuid": "0e71201c-276d-4cdc-9b0a-eb9745e4620d"
+    },
+    {
+      "type": "route",
+      "uuid": "2d25aae3-c8d4-4c70-8d81-0a7c57b5bcd4"
+    },
+    {
+      "type": "route",
+      "uuid": "0533bc96-c4ca-4b8d-8ff9-29da04e85aa9"
+    },
+    {
+      "type": "route",
+      "uuid": "7c00a675-d47b-478a-8e28-ae616504310c"
+    },
+    {
+      "type": "route",
+      "uuid": "0f11041d-185e-444c-b18d-e62d3057b15b"
+    },
+    {
+      "type": "route",
+      "uuid": "5d944a1d-3342-40cd-a4be-9f18e8de665c"
+    },
+    {
+      "type": "route",
+      "uuid": "42cf3b5c-448a-44e1-975e-d5b60553fd09"
+    },
+    {
+      "type": "route",
+      "uuid": "c83f891a-521b-45f7-9571-ad59c6cade8a"
+    },
+    {
+      "type": "route",
+      "uuid": "72ba9117-7791-47ee-b9cc-4bedcf13b6f2"
+    },
+    {
+      "type": "route",
+      "uuid": "b1117869-ad32-4749-9c66-7967446f189b"
+    },
+    {
+      "type": "route",
+      "uuid": "4b44936d-0d69-4b0e-99b9-5a4e31398fb7"
+    },
+    {
+      "type": "route",
+      "uuid": "1229e669-62ee-4e82-8ab6-bbd4c1146938"
+    },
+    {
+      "type": "route",
+      "uuid": "71df1525-c6e5-46b7-9c11-f05e0247ba6c"
+    },
+    {
+      "type": "route",
+      "uuid": "06f080b8-ded8-4bd8-9b52-cf8c312d92e1"
+    },
+    {
+      "type": "route",
+      "uuid": "e52d3eb8-345d-4b61-b075-8f9e4e519fe4"
+    },
+    {
+      "type": "route",
+      "uuid": "3be5cb75-aec9-443d-9193-107cbedc6991"
+    },
+    {
+      "type": "route",
+      "uuid": "9cfe6dd8-b36c-49cb-94ab-45494aeb2313"
+    },
+    {
+      "type": "route",
+      "uuid": "34f200db-432f-43e5-b6e0-61d397114ea5"
+    },
+    {
+      "type": "route",
+      "uuid": "0de43ba9-f637-4def-9787-d4e79b0a4be3"
+    },
+    {
+      "type": "route",
+      "uuid": "6cbe17be-dedf-4f84-ab02-896af7fa86d2"
+    },
+    {
+      "type": "route",
+      "uuid": "153be245-a247-4a08-b077-ce37ab758c59"
+    },
+    {
+      "type": "route",
+      "uuid": "818147bd-c60b-4ff3-a6ac-0f15b12c5f89"
+    },
+    {
+      "type": "route",
+      "uuid": "0470ac02-44ed-4073-a777-43708f505baf"
+    },
+    {
+      "type": "route",
+      "uuid": "51e298ab-6491-41d8-9ade-2a4db354ad37"
+    },
+    {
+      "type": "route",
+      "uuid": "f0b4493a-00f5-4a97-9e67-56fd8b58cb3c"
+    },
+    {
+      "type": "route",
+      "uuid": "cc2f9033-c670-4a3c-9868-cac15097ec80"
+    },
+    {
+      "type": "route",
+      "uuid": "6297138e-81aa-4066-a79d-6667b4205cd5"
+    },
+    {
+      "type": "route",
+      "uuid": "cd2161d4-99b4-4292-8bfa-f5a51abd1bd4"
+    },
+    {
+      "type": "route",
+      "uuid": "a4f6d5fb-4573-468d-971d-4ee3c17d19c7"
+    },
+    {
+      "type": "route",
+      "uuid": "a298430b-59e8-405c-9d11-89f1a4170793"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

@@ -19,7 +19,7 @@ The full interactive API reference is available at:
 [opus-dental.github.io/api-docs](https://opus-dental.github.io/api-docs/)
 
 The OpenAPI specification can be downloaded directly:
-[openapi.yaml](openapi.yaml)
+[openapi.json](openapi.json)
 
 ## Getting access
 
@@ -37,9 +37,7 @@ All requests require an API key.
 
 ## Status and versioning
 
-These APIs are currently in active use but subject to change. Endpoints and response formats will
-change over the next 6–12 months. Breaking changes will be communicated in the
-[changelog](docs/changelog.md) with reasonable notice.
+This API is currently in active use but subject to change. Endpoints and response formats will change over the next 6–12 months. Any breaking changes will be communicated ahead of time in the [changelog](docs/changelog.md) with reasonable notice.
 
 Do not build production systems on these endpoints without discussing stability
 commitments with Opus first.
